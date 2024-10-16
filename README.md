@@ -2,6 +2,60 @@
 
 This repository is for the **Best By Notification** app, developed by the WSU Software Development Club. The app helps users manage their food items by notifying them 2 days before their products expire. It allows users to scan food items and store expiration dates, making food management easier and more efficient.
 
+## Set up for the environments
+
+### 1. Install Node.js for the frontend
+
+Download Node.js here: https://nodejs.org/en
+
+### 2. Set up npm 
+
+In the project directory terminal:
+
+```bash
+cd client
+npm install
+```
+
+### 3. Install Python
+
+Check if you have Python: 
+
+In the project directory terminal:
+
+```bash
+python --version
+```
+To install Python:
+
+Directly install Python from the website: https://www.python.org/downloads/
+
+### 4. Install Flask:
+
+```bash
+pip install Flask
+```
+
+### 5. Install Flask Library:
+
+In our project directory:
+
+```bash
+cd flask-server
+```
+
+#### Install Flask_SQLAlchemy
+
+```bash
+pip install -U Flask-SQLAlchemy
+```
+
+#### Install Flask_CORS
+
+```bash
+pip install -U flask-cors
+```
+
 ## How to Contribute
 
 ### 1. Checkout a Branch
