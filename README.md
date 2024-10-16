@@ -55,6 +55,30 @@ pip install -U Flask-SQLAlchemy
 ```bash
 pip install -U flask-cors
 ```
+## How to run the Project
+
+### To run the Frontend
+
+In your project directory terminal (best-by-notification):
+
+```bash
+cd client
+npm run start
+```
+
+### To run the Backend
+
+If you are in the /client directory, do this command to go back one file level:
+
+```bash
+cd ..
+```
+
+In your project directory terminal (best-by-notification):
+
+```bash
+python server.py
+```
 
 ## How to Contribute
 
