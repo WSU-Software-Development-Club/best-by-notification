@@ -66,7 +66,10 @@ def get_product_by_name(name):
 # Route to fetch a product by id
 @app.route('/get_products/<int:id>', methods=['GET'])
 def get_product_by_id(id):
+  # Fetch the product by its id
   product = Product.query.get(id)
+  
+  # Check if the product exists
   if product:
     return jsonify({
       'id': product.id,
@@ -75,6 +78,21 @@ def get_product_by_id(id):
     })
   else: 
     return jsonify({'message': f'Product with id {id} not found'}), 404
+
+# Route to delete a product by id
+@app.route('/delete_product/<int:id>', methods=['DELETE'])
+def delete_product_by_id(id):
+  # Fetch the product by its id
+  product = Product.query.get(id)
+  
+  # Check if the product exists
+  if product:
+    db.session.delete(product)
+    db.session.commit()
+    return jsonify({'message': f'Product {product.name} with id {id} has been deleted successfully.'}), 200
+  else:
+    return jsonify({'message': f'Product with id {id} not found.'}), 404
+
 # Background task to check for expiring products
 def check_expiring_products():
   with app.app_context(): # Ensure we are inside an application context
