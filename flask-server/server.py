@@ -81,8 +81,11 @@ def check_expiring_products():
     products = Product.query.all()
     today = datetime.today().date()
     for product in products:
-      if (product.expiration_date - timedelta(days=2) == today):
-        print(f"Notification: {product.name} is expiring in 2 days. You better cook with it soon!")
+      dayLeft = (product.expiration_date - today).days
+      if dayLeft <= 0:
+        print(f"Notification: {product.name} is expired. It belong in the street!!!")
+      elif dayLeft <= 2:
+        print(f"Notification: {product.name} is expiring in {dayLeft} days. You better cook with it soon!")
     threading.Timer(86400, check_expiring_products).start()
     
 # Start the expiration checking thread:
