@@ -68,15 +68,11 @@ npm run start
 
 ### To run the Backend
 
-If you are in the /client directory, do this command to go back one file level:
-
-```bash
-cd ..
-```
+If you are having the Front-end running, add another terminal to simultaneously run the backend.
 
 In your project directory terminal (best-by-notification):
-
 ```bash
+cd flask-server
 python server.py
 ```
 
