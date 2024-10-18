@@ -78,7 +78,17 @@ python server.py
 
 ## How to Contribute
 
-### 1. Checkout a Branch
+### 1. Pull the latest changes
+
+Before starting any work, ensure you're up-to-date with the latest version of the project. To pull the most recent changes from the remote repository, run:
+
+```bash
+git pull origin main
+```
+
+This command will fetch the latest changes from the main branch and merge them into your local repository.
+
+### 2. Checkout a Branch
 
 Before starting any work, ensure you're working on one of your own branches or a branch that you've been assigned to. To switch to a branch, run the following command in your terminal:
 
@@ -91,24 +101,24 @@ If the branch doesn’t exist yet, create it:
 ```bash
 git checkout -b <branch-name>
 ```
-### 2. Make Changes (basically coding)
+### 3. Make Changes (basically coding)
 Implement your changes, bug fixes, or updates within the checked-out branch. Be sure to follow coding standards and project guidelines when contributing.
 
-### 3. Commit Your Changes
+### 4. Commit Your Changes
 After making changes, you need to stage and commit them. Make sure to use a meaningful and descriptive commit message to clearly explain what changes were made.
 
 ```bash
 git add .
 git commit -m "Your descriptive commit message"
 ```
-### 4. Push the Branch to Origin
+### 5. Push the Branch to Origin
 Once you're satisfied with your changes, push the branch to the remote repository on GitHub:
 
 ```bash
 git push origin <branch-name>
 ```
 
-### 5. Create a Pull Request (PR)
+### 6. Create a Pull Request (PR)
 Go to the Best By Notification GitHub repository and create a pull request (PR) from your branch to the appropriate base branch (usually main).
 
 1. Go to the Pull Requests tab.
