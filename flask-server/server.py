@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from db_setup import db
+from routes.products import products_bp
 from datetime import datetime, timedelta
 import threading
 
@@ -16,6 +16,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///products.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Set up the database
 db.init_app(app)
+
+# Register blueprints
+app.register_blueprint(products_bp)
+
 
 # Initialize the database
 with app.app_context():
