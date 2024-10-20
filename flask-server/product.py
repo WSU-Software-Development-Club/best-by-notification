@@ -1,8 +1,4 @@
-#import dependinces
-from flask_sqlalchemy import SQLAlchemy
-from datetime import date
-
-db = SQLAlchemy()
+from db_setup import db
 
 #product class
 class Product(db.Model):
