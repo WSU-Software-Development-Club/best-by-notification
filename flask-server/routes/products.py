@@ -8,9 +8,8 @@ products_bp = Blueprint('products', __name__)
 
 # TODO: make a route to add a product:
 
-
 # TODO: Route to fetch all products
-@products_bp.route('/get_product', methods = ['GET'])
+@products_bp.route('/get_products', methods = ['GET'])
 def get_products():
     products = Product.query.all()
     all_products = [x for x in products]
@@ -22,7 +21,7 @@ def get_products():
             "expiration date": cur_product.expiration_date.strftime('%Y-%m-%d')
         }
         dict_products.append(dict)
-    return jsonify(dict_products, status=200)
+    return jsonify(dict_products), 200
 
 
 # TODO: Route to fetch a product by name
