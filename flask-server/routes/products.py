@@ -1,6 +1,6 @@
 from datetime import datetime
 from db_setup import db
-from product import Product
+from models.product import Product
 from flask import Blueprint, request, jsonify
 
 # Create a Blueprint for products
