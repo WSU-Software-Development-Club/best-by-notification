@@ -28,6 +28,22 @@ def get_products():
 
 
 # TODO: Route to fetch a product by ID
-
+@product_bp.route('/get_product/<int:id>', methods=['GET'])
+def get_product(id):
+    # Step 2: Retrieve the Product by ID
+    product = Product.query.get(id)
+    
+    # Step 3: Check if the Product Exists
+    if product:
+        # Step 4: Return the Product Data as JSON
+        product_data = {
+            'id': product.id,
+            'name': product.name,
+            'expiration_date': product.expiration_date.strftime('%Y-%m-%d')
+        }
+        return jsonify(product_data), 200
+    else:
+        # Step 5: Handle the Case When the Product is Not Found
+        return jsonify({'message': 'Product not found'}), 404
 
 # TODO: Route to delete a product by ID
