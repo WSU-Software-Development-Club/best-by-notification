@@ -25,7 +25,7 @@ def get_products():
 
 
 # Route to fetch a product by name
-@products_bp.route('/get_product/string:name', methods=['GET'])
+@products_bp.route('/get_product/<string:name>', methods=['GET'])
 def get_product():
     # query only first product from db
     product = Product.query.filter_by(name=name).first()
