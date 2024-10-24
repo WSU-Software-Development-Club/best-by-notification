@@ -35,7 +35,7 @@ def get_product_by_name(name):
             "id" : product.id,
             "name" : product.name,
             "expiration date": product.expiration_date.strftime('%Y-%m-%d')
-        }, 200)
+        }), 200
     else:
         # product == None, does not exist
         return jsonify("Product not found"), 404
