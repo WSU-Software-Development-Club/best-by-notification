@@ -38,11 +38,11 @@ def get_product_by_name(name):
         }), 200
     else:
         # product == None, does not exist
-        return jsonify("Product not found"), 404
+        return jsonify({'message':"Product not found"}), 404
 
 # TODO: Route to fetch a product by ID
-@product_bp.route('/get_product/<int:id>', methods=['GET'])
-def get_product(id):
+@products_bp.route('/get_products/<int:id>', methods=['GET'])
+def get_product_by_id(id):
     # Step 2: Retrieve the Product by ID
     product = Product.query.get(id)
     
