@@ -41,7 +41,7 @@ def get_product_by_name(name):
         return jsonify("Product not found"), 404
 
 # TODO: Route to fetch a product by ID
-@products_bp.route('/get_product/<int:id>', methods=['GET'])
+@product_bp.route('/get_product/<int:id>', methods=['GET'])
 def get_product(id):
     # Step 2: Retrieve the Product by ID
     product = Product.query.get(id)
