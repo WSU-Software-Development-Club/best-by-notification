@@ -1,6 +1,6 @@
 from datetime import datetime
 from db_setup import db
-from product import Product
+from models.product import Product
 from flask import Blueprint, request, jsonify
 
 # Create a Blueprint for products
@@ -24,8 +24,21 @@ def get_products():
     return jsonify(dict_products), 200
 
 
-# TODO: Route to fetch a product by name
-
+# Route to fetch a product by name
+@products_bp.route('/get_products/<string:name>', methods=['GET'])
+def get_product_by_name(name):
+    # query only first product from db
+    product = Product.query.filter_by(name=name).first()
+    if product:
+        # product exists
+        return jsonify({
+            "id" : product.id,
+            "name" : product.name,
+            "expiration date": product.expiration_date.strftime('%Y-%m-%d')
+        }), 200
+    else:
+        # product == None, does not exist
+        return jsonify("Product not found"), 404
 
 # TODO: Route to fetch a product by ID
 
