@@ -25,7 +25,7 @@ def get_products():
 
 
 # Route to fetch a product by name
-@products_bp.route('/get_products/<string:name>', methods=['GET'])
+@products_bp.route('/get_product/<string:name>', methods=['GET'])
 def get_product_by_name(name):
     # query only first product from db
     product = Product.query.filter_by(name=name).first()
@@ -38,11 +38,11 @@ def get_product_by_name(name):
         }), 200
     else:
         # product == None, does not exist
-        return jsonify("Product not found"), 404
+        return jsonify({'message':"Product not found"}), 404
 
-# TODO: Route to fetch a product by ID
-@product_bp.route('/get_product/<int:id>', methods=['GET'])
-def get_product(id):
+# Route to fetch a product by ID
+@products_bp.route('/get_product/<int:id>', methods=['GET'])
+def get_product_by_id(id):
     # Step 2: Retrieve the Product by ID
     product = Product.query.get(id)
     
