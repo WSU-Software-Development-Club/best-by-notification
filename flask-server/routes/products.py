@@ -59,4 +59,16 @@ def get_product(id):
         # Step 5: Handle the Case When the Product is Not Found
         return jsonify({'message': 'Product not found'}), 404
 
-# TODO: Route to delete a product by ID
+# Route to delete a product by ID
+@products_bp.route("/delete_product/<int:id>", methods=['GET', 'DELETE'])
+def delete_product_by_id(id):
+    # query first product to check if it exists
+    product = Product.query.get(id)
+    if product: # product found
+        # mark product for deletion
+        db.session.delete(product)
+        # commit changes
+        db.session.commit()
+        return jsonify({'message': f"Product {product.id} deleted."}), 200
+    else: # product not found
+        return jsonify({'message': f"Product {product.id} not found."}), 404
