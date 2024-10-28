@@ -72,3 +72,35 @@ def delete_product_by_id(id):
         return jsonify({'message': f"Product {product.id} deleted."}), 200
     else: # product not found
         return jsonify({'message': f"Product {product.id} not found."}), 404
+
+# Route to update a product's expiration date with its ID
+@products_bp.route('/update_product/<int:id>', methods=['PUT'])
+def update_product(id):
+    # Fetch the product that is targeted for updating
+    product = Product.query.get(id)
+    if product:  # Run the code inside this if statement if the product exists
+        task = request.get_json() # Gets the JSON data from the request, containing the expiration date
+
+        if task.get('expiration_date'):  # If the expiration date exists in the request, then run the following:
+            expiration_date = task.get('expiration_date') # Get the expiration date from the request
+            
+            try:  # Try to convert the expiration date for use
+                new_expiration_date = datetime.strptime(data['expiration_date'], '%Y-%m-%d') # Formats the date into YYYY-MM-DD for the new expiration date
+            
+            except ValueError:  # ValueError indicates the date format is incorrect, and if so, return an error
+                return jsonify({'message': f"Invalid date format. Please use YYYY-MM-DD."}), 400 # Returns a 400 Bad Request error
+
+            # As long as no error has been returned...
+            product.expiration_date = new_expiration_date # Assign the new expiration date to the product
+
+            # Commit the change to the database
+            db.session.commit()
+
+        else:  # Otherwise, run this code if the expiration date is not specified.
+            return jsonify({'message': f"Expiration date is required."}), 400 # Returns a 400 Bad Request error
+
+    else:  # Otherwise, run this code if the product does NOT exist.
+        return jsonify({'message': f"Product ID {product.id} was not found."}), 404 # Returns a 404 Not Found error
+
+    # As long as everything was successful...
+    return jsonify({'message': f"Expiration date for {product.name} (ID {product.id}) has been updated successfully."}), 200 # Returns a 200 OK response
