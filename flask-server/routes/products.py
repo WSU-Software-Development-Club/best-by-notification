@@ -7,6 +7,17 @@ from flask import Blueprint, request, jsonify
 products_bp = Blueprint('products', __name__)
 
 # TODO: make a route to add a product:
+@products_bp.route('/add_product', methods=['POST'])
+def add_product():
+  data = request.get_json()
+  name = data['name']
+  # Parse into the date and time object with specific syntax
+  expiration_date = datetime.strptime(data['expiration_date'], '%Y-%m-%d')
+  # Create a new product with the given data and add it to the database
+  new_product = Product(name = name, expiration_date = expiration_date)
+  db.session.add(new_product)
+  db.session.commit()
+  return jsonify({'message': 'Product added successfully'}), 200
 
 # TODO: Route to fetch all products
 @products_bp.route('/get_products', methods = ['GET'])
