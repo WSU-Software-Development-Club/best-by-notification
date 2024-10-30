@@ -96,7 +96,7 @@ def update_product(id):
             expiration_date = task.get('expiration_date') # Get the expiration date from the request
             
             try:  # Try to convert the expiration date for use
-                new_expiration_date = datetime.strptime(data['expiration_date'], '%Y-%m-%d') # Formats the date into YYYY-MM-DD for the new expiration date
+                new_expiration_date = datetime.strptime(task['expiration_date'], '%Y-%m-%d') # Formats the date into YYYY-MM-DD for the new expiration date
             
             except ValueError:  # ValueError indicates the date format is incorrect, and if so, return an error
                 return jsonify({'message': f"Invalid date format. Please use YYYY-MM-DD."}), 400 # Returns a 400 Bad Request error
