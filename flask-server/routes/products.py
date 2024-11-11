@@ -80,9 +80,9 @@ def delete_product_by_id(id):
         db.session.delete(product)
         # commit changes
         db.session.commit()
-        return jsonify({'message': f"Product {product.id} deleted."}), 200
+        return jsonify({'message': f"Product {product.name} with id {product.id} has been deleted successfully"}), 200
     else: # product not found
-        return jsonify({'message': f"Product {product.id} not found."}), 404
+        return jsonify({'message': f"Product {product.name} with id {product.id} not found"}), 404
 
 # Route to update a product's expiration date with its ID
 @products_bp.route('/update_product/<int:id>', methods=['PUT'])
