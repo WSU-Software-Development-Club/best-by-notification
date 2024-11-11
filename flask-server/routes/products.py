@@ -71,7 +71,7 @@ def get_product_by_id(id):
         return jsonify({'message': 'Product not found'}), 404
 
 # Route to delete a product by ID
-@products_bp.route("/delete_product/<int:id>", methods=['GET', 'DELETE'])
+@products_bp.route("/delete_product/<int:id>", methods=['DELETE'])
 def delete_product_by_id(id):
     # query first product to check if it exists
     product = Product.query.get(id)
