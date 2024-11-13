@@ -41,5 +41,17 @@ class ProductTestCase(TestCase):
     self.assertEqual(response.status_code, 200)
     self.assertIn('Product added successfully', response.json['message'])
     
+    
+  def test_get_product_by_name(self, name):
+    response = self.client.get('/get_product/Sample')
+    self.assertEqual(response_status_code, 200)
+    data = response.get_json()
+    self.assertEqual(data['name'], "Sample")
+    self.assertEqual(data['Expiration'], "2024-12-01")
+
+
 if __name__ == '__main__':
   unittest.main()
+
+
+
