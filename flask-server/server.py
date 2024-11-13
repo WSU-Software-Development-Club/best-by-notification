@@ -31,6 +31,23 @@ with app.app_context():
 def members():
   return {"members": ["Member1", "Member2", "Member3"]}
 
+#Notifies the console when prodcuts expire
+def check_expiring_producs():
+    with app.app_context():
+        products = Products.query.all()
+        today = datetime.today().date
+        
+        for products in products:
+            dayleft = (product.expiration_date - today).days
+            if daysleft <= 0:
+                print("Notif: {product.name} is expired")
+            elif daysleft <= 2:
+                printf("Notif: {product.name} expires soon")
+            elif daysleft <= 7:
+                printf("Notif: {product.name} expires in less than a week")
+
+    threading.Timer(86400, check_expiring_producs).start()
 
 if __name__ == "__main__":
   app.run(debug=True)
+
