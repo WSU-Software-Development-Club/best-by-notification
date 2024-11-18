@@ -40,7 +40,7 @@ class ProductTestCase(TestCase):
     })
     self.assertEqual(response.status_code, 200)
     self.assertIn('Product added successfully', response.json['message'])
-  
+
     # Test for getting a product by id
   def test_get_product_by_id(self):
     product = Product.query.filter_by(name="Sample").first()
@@ -50,6 +50,20 @@ class ProductTestCase(TestCase):
     self.assertEqual(response.status_code, 200)
     self.assertIn(product.name, response.json['name'])
     self.assertIn(product.expiration_date.strftime('%Y-%m-%d'), response.json['expiration_date'])
+
+    # Test for deleting a product
+  def test_delete_product_by_id(self):
+    # Retrieve product from db
+    product = Product.query.filter_by(name='Sample').first() # Product "Sample" initialized in setUp()
+
+    # Test for deletion on existing item
+    response = self.client.delete(f'/delete_product/{product.id}')
+    self.assertEqual(response.status_code, 200)
+    self.assertIn(f'Product {product.name} with id {product.id} has been deleted successfully', response.json['message'])
+
+    # Test for deletion on non-existent item
+    response = self.client.delete(f'/delete_product/{product.id}') # Uses same id as "Sample"
+    self.assertEqual(response.status_code, 404)
 
 if __name__ == '__main__':
   unittest.main()
