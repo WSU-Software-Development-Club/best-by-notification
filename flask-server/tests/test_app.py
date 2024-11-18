@@ -41,6 +41,16 @@ class ProductTestCase(TestCase):
     self.assertEqual(response.status_code, 200)
     self.assertIn('Product added successfully', response.json['message'])
 
+    # Test for getting a product by id
+  def test_get_product_by_id(self):
+    product = Product.query.filter_by(name="Sample").first()
+    response = self.client.get(f'/get_product/{product.id}')
+
+    # Check result
+    self.assertEqual(response.status_code, 200)
+    self.assertIn(product.name, response.json['name'])
+    self.assertIn(product.expiration_date.strftime('%Y-%m-%d'), response.json['expiration_date'])
+
     # Test for deleting a product
   def test_delete_product_by_id(self):
     # Retrieve product from db
