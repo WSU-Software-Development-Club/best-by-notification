@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import Welcome from "./pages/Welcome";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import EmailForm from "./pages/EmailForm";
 
 function App() {
-  const [data, setData] = useState([{}]);
-
-  useEffect(() => {
-    fetch("/members")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        console.log(data);
-      });
-  }, []);
   return (
-    <div>
-      {typeof data.members === "undefined" ? (
-        <p>Fetching the API</p>
-      ) : (
-        data.members.map((member, i) => <p key={i}>{member}</p>)
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/emailform" element={<EmailForm />} />
+      </Routes>
+    </Router>
   );
 }
 
