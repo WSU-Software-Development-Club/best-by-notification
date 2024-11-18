@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Rubik Doodle Shadow";
+  src: url("./RubikDoodleShadow/RubikDoodleShadow-Regular.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GothicA1-Regular";
+  src: url("./GothicA1/GothicA1-Regular.ttf") format("truetype");
+}
