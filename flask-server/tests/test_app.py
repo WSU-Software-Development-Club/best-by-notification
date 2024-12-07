@@ -40,7 +40,6 @@ class ProductTestCase(TestCase):
     })
     self.assertEqual(response.status_code, 200)
     self.assertIn('Product added successfully', response.json['message'])
-
     # Test for getting a product by id
   def test_get_product_by_id(self):
     product = Product.query.filter_by(name="Sample").first()
@@ -64,6 +63,21 @@ class ProductTestCase(TestCase):
     # Test for deletion on non-existent item
     response = self.client.delete(f'/delete_product/{product.id}') # Uses same id as "Sample"
     self.assertEqual(response.status_code, 404)
+
+    # Test for get product by name
+  def test_get_product_by_name(self):
+    # Get for the Sample
+    response = self.client.get('/get_product_by_name/Sample')
+    
+    # Assert success code
+    self.assertEqual(response.status_code, 200)
+    
+    # Assert the product name matches sample
+    self.assertEqual(response.json['name'], 'Sample')
+    
+    # Assert the expiration date matches sample
+    expected_date = '2024-10-25'  # Expected expiration date
+    self.assertEqual(response.json['expiration_date'], expected_date)
 
 if __name__ == '__main__':
   unittest.main()
