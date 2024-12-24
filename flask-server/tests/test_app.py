@@ -41,6 +41,12 @@ class ProductTestCase(TestCase):
     self.assertEqual(response.status_code, 200)
     self.assertIn('Product added successfully', response.json['message'])
 
+  # Test for fetching all products
+  def test_get_product(self):
+    response = self.client.get('/get_products')
+    self.assertEqual(response.status_code, 200)
+    self.assertEqual(len(response.json), 1) # One product was added from setUp()
+  
   # Test for getting a product by id
   def test_get_product_by_id(self):
     product = Product.query.filter_by(name="Sample").first()
@@ -65,7 +71,7 @@ class ProductTestCase(TestCase):
     response = self.client.delete(f'/delete_product/{product.id}') # Uses same id as "Sample"
     self.assertEqual(response.status_code, 404)
 
-    # Test for get product by name
+  # Test for get product by name
   def test_get_product_by_name(self):
     # Get for the Sample
     response = self.client.get('/get_product/Sample')
