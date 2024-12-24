@@ -32,7 +32,7 @@ class ProductTestCase(TestCase):
     db.session.remove()
     db.drop_all()
   
-    # Test for adding a product
+  # Test for adding a product
   def test_add_product(self):
     response = self.client.post('/add_product', json={
         'name': 'Milk',
@@ -41,7 +41,7 @@ class ProductTestCase(TestCase):
     self.assertEqual(response.status_code, 200)
     self.assertIn('Product added successfully', response.json['message'])
 
-    # Test for getting a product by id
+  # Test for getting a product by id
   def test_get_product_by_id(self):
     product = Product.query.filter_by(name="Sample").first()
     response = self.client.get(f'/get_product/{product.id}')
@@ -51,7 +51,7 @@ class ProductTestCase(TestCase):
     self.assertIn(product.name, response.json['name'])
     self.assertIn(product.expiration_date.strftime('%Y-%m-%d'), response.json['expiration_date'])
 
-    # Test for deleting a product
+  # Test for deleting a product
   def test_delete_product_by_id(self):
     # Retrieve product from db
     product = Product.query.filter_by(name='Sample').first() # Product "Sample" initialized in setUp()
