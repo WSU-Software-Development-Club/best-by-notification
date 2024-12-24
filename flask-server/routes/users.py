@@ -4,7 +4,6 @@ from models.user import User
 from db_setup import db
 from models.product import Product
 
-
 users_bp = Blueprint('users', __name__)
 
 @users_bp.route('/signup', methods=['POST'])
