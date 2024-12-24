@@ -67,7 +67,7 @@ class ProductTestCase(TestCase):
     # Test for get product by name
   def test_get_product_by_name(self):
     # Get for the Sample
-    response = self.client.get('/get_product_by_name/Sample')
+    response = self.client.get('/get_product/Sample')
     
     # Assert success code
     self.assertEqual(response.status_code, 200)
@@ -77,7 +77,7 @@ class ProductTestCase(TestCase):
     
     # Assert the expiration date matches sample
     expected_date = '2024-10-25'  # Expected expiration date
-    self.assertEqual(response.json['expiration_date'], expected_date)
+    self.assertEqual(response.json['expiration date'], expected_date)
 
 if __name__ == '__main__':
   unittest.main()
