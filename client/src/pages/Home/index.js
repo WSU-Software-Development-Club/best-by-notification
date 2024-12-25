@@ -1,13 +1,12 @@
 import React from "react";
+// import Webcam from "react-webcam";
 import Stylesheet from "reactjs-stylesheet";
 import "./../../assets/fonts/fonts.css";
-import Logo from "../../components/Logo";
 
 function Home() {
   return (
     <div style={styles.homeStyle}>
       <h1 style={styles.titleStyle}>BEST BY NOTIFICATION</h1>
-      <Logo />
     </div>
   );
 }
