@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import Stylesheet from "reactjs-stylesheet";
 import "./../../assets/fonts/fonts.css";
 import Logo from "../../components/Logo";
+import EyeOpen from "./../../assets/eye.png";
+import EyeClosed from "./../../assets/hidden.png";
 import { Form, Button, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [password, setPassword] = useState("");
+  const[visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [isLinkHovered, setIsLinkHovered] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
@@ -57,12 +60,15 @@ function LoginForm() {
             />
             <Form.Control
               style={styles.inputStyle}
-              type="password"
+              type={visible ? "text" : "password"}
               placeholder="Enter your password"
               value={password}
               onChange={handlePasswordChange}
               required
             />
+            <div className = "eye-state" onClick = {() => setVisible(!visible)}>
+              {visible ? <img src={EyeOpen} alt="show-pass" style={{ width: "20px", height: "20px" }}></img> : <img src={EyeClosed}  alt="hide-pass" style={{ width: "20px", height: "20px" }}></img>}
+             </div>
           </Form.Group>
           <Button
             style={{
