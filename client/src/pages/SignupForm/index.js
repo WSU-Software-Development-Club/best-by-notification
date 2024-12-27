@@ -6,6 +6,7 @@ import EyeOpen from "./../../assets/eye.png";
 import EyeClosed from "./../../assets/hidden.png";
 import { Form, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./../../passtoggle.css";
 
 function SignupForm() {
   const [password, setPassword] = useState("");
@@ -74,7 +75,7 @@ function SignupForm() {
               onChange={handlePasswordChange}
               required
             />
-            <div className = "eye-state" onClick = {() => setVisible(!visible)}>
+            <div className = "password-toogle-icon" onClick = {() => setVisible(!visible)}>
             {visible ? <img src={EyeOpen} alt="show-pass" style={{ width: "20px", height: "20px" }}></img> : <img src={EyeClosed}  alt="hide-pass" style={{ width: "20px", height: "20px" }}></img>}
             </div>
             <Form.Control
