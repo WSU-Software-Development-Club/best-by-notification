@@ -147,8 +147,8 @@ const styles = Stylesheet.create({
     right: "1vh", // Adjust for alignment
     top: "40%",
     transform: "translateY(-50%)", // Center vertically
-    width: "30px",
-    height: "30px",
+    width: "20px",
+    height: "20px",
     cursor: "pointer",
   },
   loginFormStyle: {
