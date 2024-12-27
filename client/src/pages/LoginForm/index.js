@@ -130,16 +130,16 @@ const styles = Stylesheet.create({
     width: "100%", // Ensure it matches the container width
   },
   inputStyle: {
-    height: "3.5vh",
+    height: "6.0vh",
     width: "100%",
-    padding: "1.3vh",
+    padding: "1.5vh",
     borderRadius: "12px",
     border: "1px solid #ccc",
-    fontSize: "4vw",
+    fontSize: "5vw",
     padding: "1.3vh",
     paddingRight: "3.5vh",
     paddingBottom: "0.8vh",
-    marginBottom: "1.7vh",
+    marginBottom: "2vh",
     boxSizing: "border-box",
   },
   toggleImage: {
@@ -147,8 +147,8 @@ const styles = Stylesheet.create({
     right: "1vh", // Adjust for alignment
     top: "40%",
     transform: "translateY(-50%)", // Center vertically
-    width: "20px",
-    height: "20px",
+    width: "30px",
+    height: "30px",
     cursor: "pointer",
   },
   loginFormStyle: {
