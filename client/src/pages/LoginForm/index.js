@@ -58,6 +58,8 @@ function LoginForm() {
               onChange={handleEmailChange}
               required
             />
+            <Form.Group style={styles.formGroupStyle} controlId="formBasicPassword">
+              <div style={styles.passwordInputContainer}>
             <Form.Control
               style={styles.inputStyle}
               type={visible ? "text" : "password"}
@@ -66,9 +68,14 @@ function LoginForm() {
               onChange={handlePasswordChange}
               required
             />
-            <div className="password-toogle-icon" onClick = {() => setVisible(!visible)}>
-              {visible ? <img src={EyeOpen} alt="show-pass" style={{ width: "20px", height: "20px" }}></img> : <img src={EyeClosed}  alt="hide-pass" style={{ width: "20px", height: "20px" }}></img>}
+           <img src={visible ? EyeOpen : EyeClosed}
+            alt={visible ? "Show Password" : "Hide Password"}
+            onClick = {() => setVisible(!visible)}
+            style={styles.toggleImage}
+            />
+
              </div>
+             </Form.Group>
           </Form.Group>
           <Button
             style={{
@@ -114,6 +121,14 @@ const styles = Stylesheet.create({
     backgroundColor: "#000",
     color: "#FFF",
   },
+  passwordInputContainer: {
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center", // Center horizontally within its container
+    marginBottom: "1.7vh", // Same as other input fields
+    width: "100%", // Ensure it matches the container width
+  },
   inputStyle: {
     height: "3.5vh",
     width: "100%",
@@ -121,9 +136,20 @@ const styles = Stylesheet.create({
     borderRadius: "12px",
     border: "1px solid #ccc",
     fontSize: "4vw",
-    paddingLeft: "4vw",
+    padding: "1.3vh",
+    paddingRight: "3.5vh",
     paddingBottom: "0.8vh",
     marginBottom: "1.7vh",
+    boxSizing: "border-box",
+  },
+  toggleImage: {
+    position: "absolute",
+    right: "1vh", // Adjust for alignment
+    top: "40%",
+    transform: "translateY(-50%)", // Center vertically
+    width: "20px",
+    height: "20px",
+    cursor: "pointer",
   },
   loginFormStyle: {
     display: "flex",
@@ -135,7 +161,6 @@ const styles = Stylesheet.create({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    marginLeft: "-7vw",
     marginTop: "2vh",
     width: "100%",
   },
