@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import Stylesheet from "reactjs-stylesheet";
 import "./../../assets/fonts/fonts.css";
 import Logo from "../../components/Logo";
-import EyeOpen from "./../../assets/eye.png";
-import EyeClosed from "./../../assets/hidden.png";
-import { Form, Button, Container} from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "./../../passtoggle.css";
+import EyeOpen from "./../../assets/eye-open.png";
+import EyeClose from "./../../assets/eye-close.png";
 
 function SignupForm() {
   const [password, setPassword] = useState("");
-  const[visible, setVisible] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [isLinkHovered, setIsLinkHovered] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [isPasswordInvisible, setIsPasswordInvisible] = useState(false);
+  const [isConfirmPasswordInvisible, setIsConfirmPasswordInvisible] =
+    useState(false);
 
   const handlePasswordChange = (event) => setPassword(event.target.value);
 
@@ -67,32 +68,42 @@ function SignupForm() {
               onChange={handleEmailChange}
               required
             />
-            <Form.Group style={styles.formGroupStyle} controlId="formBasicPassword">
-            <div style={styles.passwordInputContainer}>
-            <Form.Control
-              style={styles.inputStyle}
-              type={visible ? "text" : "password"}
-              placeholder="Enter your password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-            <img src={visible ? EyeOpen : EyeClosed}
-                        alt={visible ? "Show Password" : "Hide Password"}
-                        onClick = {() => setVisible(!visible)}
-                        style={styles.toggleImage}
-                        />
-            </div>
-            </Form.Group>
-            <Form.Control
-              style={styles.inputStyle}
-              type="password"
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              onClick = {() => setVisible(!visible)}
-              required
+            <div style={styles.passwordContainer}>
+              <Form.Control
+                style={styles.inputStyle}
+                type={isPasswordInvisible ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
               />
+              <img
+                src={isPasswordInvisible ? EyeOpen : EyeClose}
+                alt={isPasswordInvisible ? "Show Password" : "Hide Password"}
+                onClick={() => setIsPasswordInvisible(!isPasswordInvisible)}
+                style={styles.toggleImage}
+              />
+            </div>
+            <div style={styles.confirmPasswordContainer}>
+              <Form.Control
+                style={styles.inputStyle}
+                type={isConfirmPasswordInvisible ? "text" : "password"}
+                placeholder="Confirm password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                required
+              />
+              <img
+                src={isConfirmPasswordInvisible ? EyeOpen : EyeClose}
+                alt={
+                  isConfirmPasswordInvisible ? "Show Password" : "Hide Password"
+                }
+                onClick={() =>
+                  setIsConfirmPasswordInvisible(!isConfirmPasswordInvisible)
+                }
+                style={styles.toggleImage}
+              />
+            </div>
           </Form.Group>
           <Button
             style={{
@@ -138,35 +149,16 @@ const styles = Stylesheet.create({
     backgroundColor: "#000",
     color: "#FFF",
   },
-  passwordInputContainer: {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center", // Center horizontally within its container
-    marginBottom: "1.7vh", // Same as other input fields
-    width: "100%", // Ensure it matches the container width
-  },
   inputStyle: {
-    height: "6.0vh",
+    height: "3.5vh",
     width: "100%",
-    padding: "1.5vh",
+    padding: "1.3vh",
     borderRadius: "12px",
     border: "1px solid #ccc",
-    fontSize: "5vw",
-    padding: "1.3vh",
-    paddingRight: "3.5vh",
+    fontSize: "4vw",
+    paddingLeft: "4vw",
     paddingBottom: "0.8vh",
-    marginBottom: "2vh",
-    boxSizing: "border-box",
-  },
-  toggleImage: {
-    position: "absolute",
-    right: "1vh", // Adjust for alignment
-    top: "40%",
-    transform: "translateY(-50%)", // Center vertically
-    width: "20px",
-    height: "20px",
-    cursor: "pointer",
+    marginBottom: "1.7vh",
   },
   signupFormStyle: {
     display: "flex",
@@ -178,6 +170,7 @@ const styles = Stylesheet.create({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
+    marginLeft: "-7vw",
     marginTop: "2vh",
     width: "100%",
   },
@@ -222,6 +215,23 @@ const styles = Stylesheet.create({
   buttonHover: {
     backgroundColor: "#333333",
     color: "#FFF",
+  },
+  passwordContainer: {
+    position: "relative",
+    width: "100%",
+  },
+  confirmPasswordContainer: {
+    position: "relative",
+    width: "100%",
+  },
+  toggleImage: {
+    position: "absolute",
+    right: "-4.5vw",
+    top: "43.5%",
+    transform: "translateY(-56%)",
+    cursor: "pointer",
+    width: "22px",
+    height: "22px",
   },
 });
 
