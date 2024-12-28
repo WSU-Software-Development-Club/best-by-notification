@@ -4,12 +4,15 @@ import "./../../assets/fonts/fonts.css";
 import Logo from "../../components/Logo";
 import { Form, Button, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import EyeOpen from "./../../assets/eye-open.png";
+import EyeClose from "./../../assets/eye-close.png";
 
 function LoginForm() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [isLinkHovered, setIsLinkHovered] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [isPasswordInvisible, setIsPasswordInvisible] = useState(false);
   const navigate = useNavigate();
 
   const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -55,14 +58,22 @@ function LoginForm() {
               onChange={handleEmailChange}
               required
             />
-            <Form.Control
-              style={styles.inputStyle}
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
+            <div style={styles.passwordContainer}>
+              <Form.Control
+                style={styles.inputStyle}
+                type={isPasswordInvisible ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+              <img
+                src={isPasswordInvisible ? EyeOpen : EyeClose}
+                alt={isPasswordInvisible ? "Show Password" : "Hide Password"}
+                onClick={() => setIsPasswordInvisible(!isPasswordInvisible)}
+                style={styles.toggleImage}
+              />
+            </div>
           </Form.Group>
           <Button
             style={{
@@ -174,6 +185,19 @@ const styles = Stylesheet.create({
   buttonHover: {
     backgroundColor: "#333333",
     color: "#FFF",
+  },
+  passwordContainer: {
+    position: "relative",
+    width: "100%",
+  },
+  toggleImage: {
+    position: "absolute",
+    right: "-4.5vw",
+    top: "43.5%",
+    transform: "translateY(-56%)",
+    cursor: "pointer",
+    width: "22px",
+    height: "22px",
   },
 });
 

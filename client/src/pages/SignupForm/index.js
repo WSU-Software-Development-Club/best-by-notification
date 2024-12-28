@@ -4,6 +4,8 @@ import "./../../assets/fonts/fonts.css";
 import Logo from "../../components/Logo";
 import { Form, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import EyeOpen from "./../../assets/eye-open.png";
+import EyeClose from "./../../assets/eye-close.png";
 
 function SignupForm() {
   const [password, setPassword] = useState("");
@@ -11,6 +13,9 @@ function SignupForm() {
   const [email, setEmail] = useState("");
   const [isLinkHovered, setIsLinkHovered] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [isPasswordInvisible, setIsPasswordInvisible] = useState(false);
+  const [isConfirmPasswordInvisible, setIsConfirmPasswordInvisible] =
+    useState(false);
 
   const handlePasswordChange = (event) => setPassword(event.target.value);
 
@@ -63,22 +68,42 @@ function SignupForm() {
               onChange={handleEmailChange}
               required
             />
-            <Form.Control
-              style={styles.inputStyle}
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-            <Form.Control
-              style={styles.inputStyle}
-              type="password"
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              required
-            />
+            <div style={styles.passwordContainer}>
+              <Form.Control
+                style={styles.inputStyle}
+                type={isPasswordInvisible ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+              <img
+                src={isPasswordInvisible ? EyeOpen : EyeClose}
+                alt={isPasswordInvisible ? "Show Password" : "Hide Password"}
+                onClick={() => setIsPasswordInvisible(!isPasswordInvisible)}
+                style={styles.toggleImage}
+              />
+            </div>
+            <div style={styles.confirmPasswordContainer}>
+              <Form.Control
+                style={styles.inputStyle}
+                type={isConfirmPasswordInvisible ? "text" : "password"}
+                placeholder="Confirm password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                required
+              />
+              <img
+                src={isConfirmPasswordInvisible ? EyeOpen : EyeClose}
+                alt={
+                  isConfirmPasswordInvisible ? "Show Password" : "Hide Password"
+                }
+                onClick={() =>
+                  setIsConfirmPasswordInvisible(!isConfirmPasswordInvisible)
+                }
+                style={styles.toggleImage}
+              />
+            </div>
           </Form.Group>
           <Button
             style={{
@@ -190,6 +215,23 @@ const styles = Stylesheet.create({
   buttonHover: {
     backgroundColor: "#333333",
     color: "#FFF",
+  },
+  passwordContainer: {
+    position: "relative",
+    width: "100%",
+  },
+  confirmPasswordContainer: {
+    position: "relative",
+    width: "100%",
+  },
+  toggleImage: {
+    position: "absolute",
+    right: "-4.5vw",
+    top: "43.5%",
+    transform: "translateY(-56%)",
+    cursor: "pointer",
+    width: "22px",
+    height: "22px",
   },
 });
 
