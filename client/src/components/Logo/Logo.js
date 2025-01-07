@@ -1,9 +1,10 @@
 import React from "react";
-import logo from "./../assets/fried-egg.png";
+import logo from "./../../assets/images/fried-egg.png";
 import Stylesheet from "reactjs-stylesheet";
+import "./Logo.css";
 
 function Logo() {
-  return <img src={logo} alt="Logo" style={styles.logoStyle} />;
+  return <img src={logo} alt="Logo" className="logoStyle" />;
 }
 
 const styles = Stylesheet.create({
