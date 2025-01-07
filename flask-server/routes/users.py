@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
-from flask_login import login_user, logout_user, login_required, LoginManager
+from flask_login import login_user, logout_user, login_required, LoginManager, current_user
 from models.user import User
 from db_setup import db
 from models.product import Product
+
 
 users_bp = Blueprint('users', __name__)
 
@@ -67,15 +68,34 @@ def login():
   user = User.query.filter_by(email=email).first()
   if user and user.check_password(password):
     login_user(user)
-    return jsonify({'message': f'Login successful'}), 200
+    return jsonify({
+      'message': 'Login successful',
+      'user': {
+          'id': user.id,
+          'email': user.email
+      }
+    }), 200
   else:
     return jsonify({'error': 'Invalid email or password'}), 401
+  
+@users_bp.route('/current_user', methods=['GET'])
+@login_required
+def get_current_user():
+  """Fetch the currently logged-in user's details"""
+  return jsonify({
+    'id': current_user.id,
+    'email': current_user.email
+  })
   
 @users_bp.route('/logout', methods=['POST'])
 @login_required
 def logout():
+  print("Logout route accessed")  # Add this log
   logout_user()
-  return jsonify({'message': 'Logged out successfully'}), 200
+  response = jsonify({'message': 'Logged out successfully'})
+  response.headers['Cache-Control'] = 'no-store'
+  response.set_cookie('session', '', expires=0)  # Clear session cookie
+  return response
 
 @users_bp.route('/protected', methods=['GET'])
 @login_required

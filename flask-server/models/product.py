@@ -8,6 +8,7 @@ class Product(db.Model):
   name = db.Column(db.String(100), nullable=False)
   expiration_date = db.Column(db.Date, nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+  category = db.Column(db.String(50), nullable=False)  # Add category field
   
   user = db.relationship('User', back_populates='products')
   
