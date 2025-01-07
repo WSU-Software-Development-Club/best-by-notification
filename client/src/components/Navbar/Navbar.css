@@ -1,0 +1,70 @@
+/* Bottom Navbar Styles */
+.bottomNavbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #202020;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 1000;
+  gap: 0.781vw;
+}
+
+.navbarButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #000;
+  border: 2px solid #404040;
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+  /* flex-grow: 1; */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow to make the button pop */
+  transition: all 0.3s ease;
+}
+
+.navbarButton:hover {
+  background-color: #333333; /* Darker tone on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+  transform: translateY(-2px); /* Slight pop-out effect */
+  border-color: #ccc; /* Lighter border color on hover */
+}
+
+/* Optional: Focus state for better accessibility */
+.navbarButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Blue focus ring */
+}
+
+/* Sidebar Styles for Larger Screens */
+@media screen and (min-width: 1280px) {
+  .bottomNavbar {
+    position: fixed;
+    bottom: unset;
+    left: 0;
+    top: 0;
+    width: 16vw; /* Adjust the width as needed */
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 0;
+    gap: 20px; /* Increased gap between buttons for better spacing */
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2); /* Add a shadow for better visibility */
+  }
+
+  .navbarButton {
+    width: 90%; /* Stretch buttons to match sidebar width */
+    padding: 10px 0px; /* Thin height for buttons */
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 10px; /* Slightly rounded corners */
+  }
+
+  .navbarButton:hover {
+    transform: translateX(5px); /* Subtle slide-in effect on hover */
+  }
+}

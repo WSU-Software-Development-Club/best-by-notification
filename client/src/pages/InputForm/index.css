@@ -1,0 +1,70 @@
+@import url("./../../assets/fonts/fonts.css");
+
+.homeContainerStyle {
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  margin-top: 4vh;
+}
+
+.appTitleStyle {
+  font-family: "GothicA1-Regular";
+  border-bottom: "3px solid black";
+  font-size: 8vw;
+}
+
+.homeTitleStyle {
+  font-family: "GothicA1-Regular";
+  margin-bottom: 5vh;
+  margin-top: -1vh;
+  font-size: 8vw;
+}
+
+.buttonContainer {
+  margin-top: 4vh;
+  display: flex;
+  gap: 10px;
+}
+
+.actionButton {
+  padding: 5px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #000;
+  color: #fff;
+  flex: 1;
+}
+
+.actionButton:hover {
+  background-color: #333333;
+}
+
+@media screen and (min-width: 1280px) {
+  .homeContainerStyle {
+    margin-top: 0vh;
+  }
+
+  .appTitleStyle {
+    font-size: 3vw;
+  }
+
+  .homeTitleStyle {
+    font-size: 3vw;
+  }
+
+  .buttonContainer {
+    margin-top: 10vh;
+    display: flex;
+    gap: 50px;
+  }
+
+  .actionButton {
+    padding: 10px 25px;
+    font-size: 1.2rem;
+    border-radius: 1.5vw;
+    flex: 1;
+  }
+}

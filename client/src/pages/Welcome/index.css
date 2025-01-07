@@ -1,0 +1,56 @@
+.welcomeStyle {
+  background-color: #f0b289;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circleStyle {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid #ac8266;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.textStyle {
+  font-family: Rubik Doodle Shadow;
+  color: #fffbfb;
+  font-size: 32px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.startButtonStyle {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  background-color: #ffdac1;
+  color: #985c35;
+  font-size: 32px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  font-family: GothicA1-Regular;
+}
+
+.startButtonStyle:hover {
+  background-color: #ffd1b3;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+}
+
+@media screen and (min-width: 1280px) {
+  .circleStyle {
+    width: 260px;
+    height: 260px;
+  }
+}

@@ -1,0 +1,23 @@
+.productBar {
+  border: 1px solid black;
+  width: 100vw;
+}
+
+.productInfo {
+}
+
+.deleteButton {
+}
+
+@media screen and (min-width: 1280px) {
+  .productBar {
+    border: 1px solid black;
+    width: 50vw;
+  }
+
+  .productInfo {
+  }
+
+  .deleteButton {
+  }
+}
