@@ -1,0 +1,108 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContainer {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 80%;
+}
+
+.modalTitle {
+  font-family: GothicA1-Regular;
+  font-size: 5.5vw;
+  text-align: center;
+}
+
+.inputField {
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #c0c0c0;
+  font-family: GothicA1-Regular;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap: 45px;
+}
+
+.modalActionButton {
+  padding: 8px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #000;
+  color: #fff;
+  flex: 1;
+}
+
+.modalActionButton:hover {
+  background-color: #333333;
+}
+
+@media screen and (min-width: 1280px) {
+  .modalContainer {
+    padding: 1.5625vw;
+    padding-bottom: 5vh;
+    padding-top: 0.3vh;
+    border-radius: 1.5vw;
+    box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.1);
+    width: unset;
+  }
+
+  .modalTitle {
+    font-size: 3vw;
+    text-align: center;
+  }
+
+  .inputField {
+    margin: 10px 0;
+    padding: 1.7vh;
+    width: 98%;
+    border-radius: 1vw;
+    border: 1px solid #c0c0c0;
+    font-family: GothicA1-Regular;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+  }
+
+  /* Style dropdown */
+  select.inputField {
+    /* appearance: none; */
+    cursor: pointer;
+    padding-right: 10px;
+  }
+
+  .modalButtons {
+    padding-top: 3vh;
+  }
+
+  .modalActionButton {
+    padding: 1.25vh 1.25vw;
+    font-size: 1.2rem;
+    border-radius: 20px;
+  }
+
+  .signoutLinkStyle {
+    margin-top: 26vh;
+    text-align: end;
+    font-size: 20px;
+    color: #1877f2;
+  }
+}

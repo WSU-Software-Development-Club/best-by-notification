@@ -1,0 +1,10 @@
+.logoStyle {
+  width: 17.61vh;
+  height: auto;
+}
+
+@media screen and (min-width: 1280px) {
+  .logoStyle {
+    width: 26vh;
+  }
+}
