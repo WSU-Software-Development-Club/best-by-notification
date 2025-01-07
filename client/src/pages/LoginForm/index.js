@@ -7,11 +7,12 @@ import EyeOpen from "./../../assets/images/eye-open.png";
 import EyeClose from "./../../assets/images/eye-close.png";
 import "./index.css";
 
+
 function LoginForm() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [isPasswordInvisible, setIsPasswordInvisible] = useState(false);
-  const navigate = useNavigate();
+  const [isLinkHovered, setIsLinkHovered] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
 
   const handlePasswordChange = (event) => setPassword(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
@@ -91,6 +92,7 @@ function LoginForm() {
     </div>
   );
 }
+
 
 // const styles = Stylesheet.create({
 //   buttonStyle: {

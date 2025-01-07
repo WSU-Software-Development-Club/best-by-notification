@@ -8,13 +8,13 @@ import EyeOpen from "./../../assets/images/eye-open.png";
 import EyeClose from "./../../assets/images/eye-close.png";
 import "./index.css";
 
+
 function SignupForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [isPasswordInvisible, setIsPasswordInvisible] = useState(false);
-  const [isConfirmPasswordInvisible, setIsConfirmPasswordInvisible] =
-    useState(false);
+  const [isLinkHovered, setIsLinkHovered] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
 
   const handlePasswordChange = (event) => setPassword(event.target.value);
 
