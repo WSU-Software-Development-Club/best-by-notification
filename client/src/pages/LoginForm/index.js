@@ -86,6 +86,11 @@ function LoginForm() {
               Don't have an account? Sign up here!
             </Link>
           </div>
+          <div className="forgotPasswordLinkStyle">
+            <Link to="/ResetForm" className="forgotPasswordLink">
+              Forgot password?
+            </Link>
+          </div>
         </Form>
       </Container>
     </div>
