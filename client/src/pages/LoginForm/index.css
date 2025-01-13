@@ -86,33 +86,21 @@
   cursor: pointer;
 }
 
-.signupLinkStyle {
+.signupLinkStyle,
+.forgotPasswordLinkStyle {
   margin-top: 1rem;
   text-align: end;
   color: #1877f2;
 }
 
-.signupLink {
+.signupLink,
+.forgotPasswordLink {
   text-decoration: none;
   color: inherit;
 }
 
-.signupLink:hover {
-  text-decoration: underline;
-}
-
-.forgotpasswordLinkStyle {
-  margin-top: 1rem;
-  text-align: end;
-  color: #1877f2;
-}
-
-.forgotpasswordLink {
-  text-decoration: none;
-  color: inherit;
-}
-
-.forgotpasswordLink:hover {
+.signupLink:hover,
+.forgotPasswordLink:hover {
   text-decoration: underline;
 }
 
@@ -161,17 +149,11 @@
     margin-top: 0.7vh;
   }
 
-  .signupLink {
+  .signupLink,
+  .forgotPasswordLink {
     text-decoration: none;
     color: inherit;
     font-size: 1.1rem;
     margin-left: 1vw;
   }
-
-  .forgotpasswordLink {
-    text-decoration: none;
-    color: inherit;
-    font-size: 1.1rem;
-    margin-left: 1vw;
-  }     
 }
