@@ -55,7 +55,7 @@ function ResetForm() {
           </Button>
           <div className="loginLinkStyle">
             <Link to="/LoginForm" className="loginLink">
-              Go to back Login Page
+              Go back to Login Page
             </Link>
           </div>
         </Form>
