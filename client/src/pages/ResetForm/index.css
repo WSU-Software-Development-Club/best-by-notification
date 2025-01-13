@@ -1,6 +1,4 @@
-@import url("./../../assets/fonts/fonts.css");
-
-.loginContainerStyle {
+.resetContainerStyle{
   align-items: center;
   flex-direction: column;
   display: flex;
@@ -17,14 +15,14 @@
   font-size: 8vw;
 }
 
-.loginTitleStyle {
+.resetTitleStyle {
   font-family: GothicA1-Regular;
   margin-bottom: 5vh;
   margin-top: -1vh;
   font-size: 8vw;
 }
 
-.loginFormStyle {
+.resetFormStyle {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,11 +48,6 @@
   padding-left: 4vw;
   padding-bottom: 0.8vh;
   margin-bottom: 1.7vh;
-}
-
-.passwordContainer {
-  position: relative;
-  width: 100%;
 }
 
 .toggleImage {
@@ -86,34 +79,31 @@
   cursor: pointer;
 }
 
-.signupLinkStyle,
-.forgotPasswordLinkStyle {
+.loginLinkStyle {
   margin-top: 1rem;
   text-align: end;
   color: #1877f2;
 }
 
-.signupLink,
-.forgotPasswordLink {
+.loginLink {
   text-decoration: none;
   color: inherit;
 }
 
-.signupLink:hover,
-.forgotPasswordLink:hover {
+.loginLink:hover {
   text-decoration: underline;
 }
 
 @media screen and (min-width: 1280px) {
-  .loginContainerStyle {
+  .resetContainerStyle{
     margin-top: 0vh;
   }
 
-  .appTitleStyle {
+  .resetTitleStyle {
     font-size: 3vw;
   }
 
-  .loginTitleStyle {
+  .appTitleStyle {
     font-size: 3vw;
   }
 
@@ -149,8 +139,7 @@
     margin-top: 0.7vh;
   }
 
-  .signupLink,
-  .forgotPasswordLink {
+  .loginLink {
     text-decoration: none;
     color: inherit;
     font-size: 1.1rem;
