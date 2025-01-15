@@ -1,0 +1,36 @@
+@import url("./../../assets/fonts/fonts.css");
+
+.historyContainerStyle {
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  margin-top: 4vh;
+}
+
+.appTitleStyle {
+  font-family: "GothicA1-Regular";
+  border-bottom: "3px solid black";
+  font-size: 8vw;
+}
+
+.historyTitleStyle {
+  font-family: "GothicA1-Regular";
+  margin-bottom: 5vh;
+  margin-top: -1vh;
+  font-size: 8vw;
+}
+
+@media screen and (min-width: 1280px) {
+  .homeContainerStyle {
+    margin-top: 0vh;
+  }
+
+  .appTitleStyle {
+    font-size: 3vw;
+  }
+
+  .historyTitleStyle {
+    font-size: 3vw;
+  }
+}

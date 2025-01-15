@@ -89,18 +89,21 @@
   cursor: pointer;
 }
 
-.loginLinkStyle {
+.loginLinkStyle,
+.forgotPasswordLinkStyle {
   margin-top: 1rem;
   text-align: end;
   color: #1877f2;
 }
 
-.loginLink {
+.loginLink,
+.forgotPasswordLink {
   text-decoration: none;
   color: inherit;
 }
 
-.loginLink:hover {
+.loginLink:hover,
+.forgotPasswordLink:hover {
   text-decoration: underline;
 }
 
@@ -149,7 +152,8 @@
     margin-top: 0.7vh;
   }
 
-  .loginLink {
+  .loginLink,
+  .forgotPasswordLink {
     text-decoration: none;
     color: inherit;
     font-size: 1.1rem;

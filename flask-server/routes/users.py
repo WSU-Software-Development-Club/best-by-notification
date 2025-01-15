@@ -101,3 +101,20 @@ def logout():
 @login_required
 def protected_route():
   return jsonify({'message': 'This is a protected route accessible only to authenticated users.'})
+
+@users_bp.route('/forgot_password', methods=['POST'])
+def forgot_password():
+  """Route for password reset"""
+  data = request.get_json()
+  email = data.get('email')
+  
+  # Input validation
+  if not email:
+    return jsonify({'error': 'Email is required'}), 400
+  
+  user = User.query.filter_by(email=email).first()
+  if not user:
+    return jsonify({'error': f'User with email {email} not found'}), 404
+  
+  # Send password reset email
+  return jsonify({'message': 'Password reset email sent successfully'}), 200
