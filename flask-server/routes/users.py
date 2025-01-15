@@ -3,7 +3,9 @@ from flask_login import login_user, logout_user, login_required, LoginManager, c
 from models.user import User
 from db_setup import db
 from models.product import Product
-
+import random
+import string
+from datetime import datetime, timedelta
 
 users_bp = Blueprint('users', __name__)
 
@@ -102,6 +104,11 @@ def logout():
 def protected_route():
   return jsonify({'message': 'This is a protected route accessible only to authenticated users.'})
 
+#Forgot Password
+#generate random code
+def generate_reset_code(length = 6):
+  return ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
+
 @users_bp.route('/forgot_password', methods=['POST'])
 def forgot_password():
   """Route for password reset"""
@@ -116,5 +123,61 @@ def forgot_password():
   if not user:
     return jsonify({'error': f'User with email {email} not found'}), 404
   
-  # Send password reset email
-  return jsonify({'message': 'Password reset email sent successfully'}), 200
+  reset_code = generate_reset_code()
+  user.reset_code = reset_code
+  user.reset_code_expiry = timedelta(minutes=15)  # Set expiry time for reset code
+  db.session.commit()
+
+# Send email with reset code
+  try:
+    msg = Message('Password Reset Code', recipients=[email])
+    msg.body = f"Your password reset code is {reset_code}."
+    mail.send(msg)
+    return jsonify({'message': 'Reset code sent successfully'}), 200
+  except Exception as e:
+    return jsonify({'error': 'Failed to send email'}), 500
+
+# Verify the code
+@users_bp.route('/verify_reset_code', methods=['POST'])
+def verify_reset_code():
+  data = request.get_json()
+  email = data.get('email')
+  reset_code = data.get('reset_code')
+  
+  # Input validation
+  if not email or not reset_code:
+    return jsonify({'error': 'Email and reset code are required'}), 400
+  
+  user = User.query.filter_by(email=email).first()
+  if not user:
+    return jsonify({'error': f'User with email {email} not found'}), 404
+  
+  if user.reset_code == reset_code and user.reset_code_expiry < datetime.now():
+    return jsonify({'message': 'Reset code verified successfully'}), 200
+  else:
+    return jsonify({'error': 'Invalid reset code'}), 401
+
+# Reset new password 
+@users_bp.route('/reset_password', methods=['POST'])
+def reset_password():
+  data = request.get_json()
+  email = data.get('email')
+  reset_code = data.get('reset_code')
+  new_password = data.get('new_password')
+  
+  # Input validation
+  if not email or not reset_code or not new_password:
+    return jsonify({'error': 'Email, reset code, and new password are required'}), 400
+  
+  user = User.query.filter_by(email=email).first()
+  if not user:
+    return jsonify({'error': f'User with email {email} not found'}), 404
+  
+  if user.reset_code == reset_code and user.reset_code_expiry < datetime.now():
+    user.password = new_password
+    user.reset_code = None
+    user.reset_code_expiry = None
+    db.session.commit()
+    return jsonify({'message': 'Password reset successfully'}), 200
+  else:
+    return jsonify({'error': 'Invalid reset code'}), 401
