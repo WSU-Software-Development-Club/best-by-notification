@@ -86,10 +86,7 @@ function InputForm() {
         <button className="actionButton" onClick={toggleModal}>
           Add Product
         </button>
-        <button
-          className="actionButton"
-          onClick={() => navigate("/DatabaseView")}
-        >
+        <button className="actionButton" onClick={() => navigate("/History")}>
           View Database
         </button>
       </div>

@@ -2,11 +2,49 @@ import React from "react";
 import "./ProductBar.css";
 
 const ProductBar = ({
+  productID,
   productName,
   expirationDate,
   productCategory,
-  handleDelete,
 }) => {
+  const handleDeletion = async (event) => {
+    event.preventDefault();
+
+    // Get user ID
+    // const userId = sessionStorage.getItem("userId");
+    // const productId = event.target.getAttribute("productID");
+
+    if (!productID) {
+      alert("Product ID not found.");
+      return;
+    }
+
+    try {
+      // API URL for deleting a product
+      const apiUrl = `${process.env.REACT_APP_API_BASE_URL}/delete_product/${productID}`;
+
+      const response = await fetch(apiUrl, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message);
+      } else {
+        alert(`Error: ${result.error}`);
+        console.log("Error deleting product:", result.error);
+      }
+    } catch (error) {
+      console.log("Error deleting product:", error);
+      alert(
+        "Failed to delete product. Please try again later. Error: " + error
+      );
+    }
+  };
   const formatDate = (dateString) => {
     // Try parsing the date using Date object
     const date = new Date(Date.parse(dateString)); // Convert to valid format
@@ -27,7 +65,7 @@ const ProductBar = ({
         <p>Category: {productCategory}</p>
         <p>Expires: {formatDate(expirationDate)}</p>
       </div>
-      <button className="deleteButton" onClick={handleDelete}>
+      <button className="deleteButton" onClick={handleDeletion}>
         Delete
       </button>
     </div>

@@ -12,7 +12,9 @@ class Product(db.Model):
   
   user = db.relationship('User', back_populates='products')
   
-  def __init__(self, name, expiration_date, user_id):
+  def __init__(self, name, category, expiration_date, user_id):
+    # self.id = id
     self.name = name
     self.expiration_date = expiration_date
     self.user_id = user_id
+    self.category = category
