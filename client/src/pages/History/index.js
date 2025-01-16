@@ -127,12 +127,10 @@ function History() {
         ) : (
           products.map((product, index) => (
             <ProductBar
+              productID={product.id}
               productName={product.name}
               productCategory={product.category}
               expirationDate={product.expiration_date}
-              handleDelete={() => {
-                alert(`Delete product: ${product.name}`);
-              }}
             ></ProductBar>
           ))
         )}
