@@ -3,6 +3,8 @@ from flask_login import login_user, logout_user, login_required, LoginManager, c
 from models.user import User
 from db_setup import db
 from models.product import Product
+from server import mail
+from flask_mail import Message
 import random
 import string
 from datetime import datetime, timedelta
