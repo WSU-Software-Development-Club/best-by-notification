@@ -87,7 +87,7 @@ function LoginForm() {
             </Link>
           </div>
           <div className="forgotPasswordLinkStyle">
-            <Link to="/ResetForm" className="forgotPasswordLink">
+            <Link to="/ForgotPasswordForm" className="forgotPasswordLink">
               Forgot password?
             </Link>
           </div>

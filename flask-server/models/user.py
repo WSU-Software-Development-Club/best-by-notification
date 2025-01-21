@@ -8,10 +8,14 @@ class User(db.Model, UserMixin):
   email = db.Column(db.String(150), unique=True, nullable=False) # User's email
   password_hash = db.Column(db.String(256), nullable=False)  # Store hashed password
   active = db.Column(db.Boolean, default=True, nullable=False)  # Active status
-  products = db.relationship('Product', backref='user', lazy=True) # Relationship with Product
+  # products = db.relationship('Product', backref='user', lazy=True) # Relationship with Product
   
   # Relationships
   products = db.relationship('Product', back_populates='user', lazy=True)  # Bidirectional relationship
+  
+  # Optional reset code
+  reset_code = db.Column(db.String(6), nullable=True)
+  reset_code_expiry = db.Column(db.DateTime, nullable=True)
   
   def set_password(self, password):
     """Hashes and sets the password."""
