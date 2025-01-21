@@ -1,0 +1,148 @@
+.resetContainerStyle{
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  margin-top: 4vh;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.appTitleStyle {
+  font-family: GothicA1-Regular;
+  border-bottom: 3px solid black;
+  font-size: 8vw;
+}
+
+.resetTitleStyle {
+  font-family: GothicA1-Regular;
+  margin-bottom: 5vh;
+  margin-top: -1vh;
+  font-size: 8vw;
+}
+
+.resetFormStyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formGroupStyle {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: -7vw;
+  margin-top: 2vh;
+  width: 100%;
+}
+
+.inputStyle {
+  height: 3.5vh;
+  width: 100%;
+  padding: 1.3vh;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 4vw;
+  padding-left: 4vw;
+  padding-bottom: 0.8vh;
+  margin-bottom: 1.7vh;
+}
+
+.toggleImage {
+  position: absolute;
+  right: -4.5vw;
+  top: 43.5%;
+  transform: translateY(-56%);
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+}
+
+.buttonStyle {
+  padding: 1.3vw;
+  padding-top: 1.6vh;
+  padding-bottom: 1.6vh;
+  width: 110%;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 4vw;
+  margin-top: 0.7vh;
+  background-color: #000;
+  color: #fff;
+}
+
+.buttonStyle:hover {
+  background-color: #333333;
+  color: #fff;
+  cursor: pointer;
+}
+
+.loginLinkStyle {
+  margin-top: 1rem;
+  text-align: end;
+  color: #1877f2;
+}
+
+.loginLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.loginLink:hover {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1280px) {
+  .resetContainerStyle{
+    margin-top: 0vh;
+  }
+
+  .resetTitleStyle {
+    font-size: 3vw;
+  }
+
+  .appTitleStyle {
+    font-size: 3vw;
+  }
+
+  .formGroupStyle {
+    margin-left: -1vw;
+    margin-top: 2vh;
+    width: 35%;
+  }
+
+  .inputStyle {
+    height: 4.5vh;
+    width: 100%;
+    font-size: 1.3vw;
+    padding-left: 1vw;
+    padding-bottom: 1vh;
+    margin-bottom: 1.7vh;
+  }
+
+  .toggleImage {
+    right: -1vw;
+    top: 43.5%;
+    width: 1.4vw;
+    height: 1.4vw;
+  }
+
+  .buttonStyle {
+    margin-left: 1vw;
+    padding: 1.3vw;
+    padding-top: 1.6vh;
+    padding-bottom: 1.6vh;
+    width: 38%;
+    font-size: 1.3vw;
+    margin-top: 0.7vh;
+  }
+
+  .loginLink {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.1rem;
+    margin-left: 1vw;
+  }
+}

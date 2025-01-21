@@ -149,7 +149,7 @@ def reset_password():
     """
     data = request.get_json()
     email = data.get('email')
-    reset_code = data.get('reset_code')
+    reset_code = data.get('token')
     new_password = data.get('new_password', None)  # Optional
 
     # Input validation
@@ -172,3 +172,25 @@ def reset_password():
         return jsonify({'message': 'Reset code verified. Redirect to reset password page.'}), 200
     else:
       return jsonify({'error': 'Invalid or expired reset code'}), 401
+
+@users_bp.route('/set_new_password', methods=['POST'])
+def set_new_password():
+    """
+    Route to set new password
+    """
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email:
+      return jsonify({'error': f'Email is required.'}), 400
+    
+    user = User.query.filter_by(email=email).first()
+    if not user:
+      return jsonify({'error': f'User with email {email} not found'}), 404
+    
+    if password:
+      user.set_password(password)
+      return jsonify({'message': 'Password reset successfully'}), 200
+    else:
+      return jsonify({'error': 'Password is required'}), 400
