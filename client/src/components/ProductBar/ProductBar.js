@@ -17,7 +17,7 @@ const getCategoryIcons = (category) => {
     poultry: poultry,
     seafood: seafood,
     dairy: dairy,
-    fruit: fruit,
+    fruits: fruit,
     vegetables: vegetables,
     grains: grains,
     snacks: snacks,
@@ -75,9 +75,10 @@ const ProductBar = ({
     }
   };
   const formatDate = (dateString) => {
-    if (!dateString) { // stuck here after parsing
+    if (!dateString) {
+      // stuck here after parsing
       return "No date provided";
-    } 
+    }
     // Try parsing the date using Date object
     const date = new Date(Date.parse(dateString)); // Convert to valid format
     if (isNaN(date)) {
@@ -95,7 +96,7 @@ const ProductBar = ({
 
   return (
     <div className="productBar">
-      <img src={icons} alt={productCategory} className="categoryIcon"/>
+      <img src={icons} alt={productCategory} className="categoryIcon" />
       <div className="productInfo">
         <h3>{productName}</h3>
         <p>Category: {productCategory}</p>
