@@ -2,9 +2,9 @@ import React from "react";
 import "./ProductBar.css";
 
 import poultry from "./../../assets/icons/chicken-leg-icon.png";
-import seafood from "./../../assets/icons/shrimp-icon.png";
+import seafood from "./../../assets/icons/seafood-icon.png";
 import dairy from "./../../assets/icons/milk-icon.png";
-import fruit from "./../../assets/icons/cherry-fruit-icon.png";
+import fruit from "./../../assets/icons/fruit-basket-icon.png";
 import vegetables from "./../../assets/icons/carrot-vegetable-icon.png";
 import grains from "./../../assets/icons/rice-icon.png";
 import snacks from "./../../assets/icons/snacks-icon.png";
