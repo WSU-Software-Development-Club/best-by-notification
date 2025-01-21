@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./../../assets/fonts/fonts.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
@@ -19,6 +19,29 @@ function History() {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  const fetchProducts = useCallback(async () => {
+    const userId = sessionStorage.getItem("userId");
+    const apiUrl = `${process.env.REACT_APP_API_BASE_URL}/user/${userId}/get_products`;
+
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      console.log("API Response:", data); // Check the structure of the response
+      if (response.ok) {
+        if (data) {
+          setProducts(data);
+        } else {
+          console.log("No products found.");
+        }
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.log("Error fetching products:", error);
+      alert("Failed to fetch products. Please try again later. Error: " + error);
+    }
+  }, []);
 
   // Handles form submission
   const handleSubmit = async (event) => {
@@ -57,7 +80,8 @@ function History() {
 
       if (response.ok) {
         alert(data.message); // Success message
-        // toggleModal(); //// Close the modal (Optional)
+        toggleModal(); //// Close the modal (Optional)
+        await fetchProducts(); // Fetch products again to update the list
       } else {
         alert(`Error: ${data.error}`); // Error message
       }
@@ -71,31 +95,6 @@ function History() {
     setProductName("");
     setExpirationDate("");
     setProductCategory("");
-  };
-
-  const fetchProducts = async () => {
-    const userId = sessionStorage.getItem("userId");
-    const apiUrl = `${process.env.REACT_APP_API_BASE_URL}/user/${userId}/get_products`;
-
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      console.log("API Response:", data); // Check the structure of the response
-      if (response.ok) {
-        if (data) {
-          setProducts(data);
-        } else {
-          console.log("No products found.");
-        }
-      } else {
-        alert(`Error: ${data.error}`);
-      }
-    } catch (error) {
-      console.log("Error fetching products:", error);
-      alert(
-        "Failed to fetch products. Please try again later. Error: " + error
-      );
-    }
   };
 
   useEffect(() => {
@@ -127,10 +126,12 @@ function History() {
         ) : (
           products.map((product, index) => (
             <ProductBar
+              key={product.id}
               productID={product.id}
               productName={product.name}
               productCategory={product.category}
               expirationDate={product.expiration_date}
+              onDeletion={fetchProducts}
             ></ProductBar>
           ))
         )}

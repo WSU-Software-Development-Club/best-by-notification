@@ -1,12 +1,70 @@
+.productBars {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.categoryIcon {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+}
+
 .productBar {
-  border: 1px solid black;
-  width: 100vw;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.productBar:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .productInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  flex-grow: 1;
+}
+
+.productInfo h3 {
+  font-family: GothicA1-Regular;
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.productInfo p {
+  font-family: GothicA1-Regular;
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
 }
 
 .deleteButton {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.deleteButton:hover {
+  background-color: #cc0000;
+  transform: scale(1.05);
+}
+
+.deleteButton:active {
+  transform: scale(0.95);
 }
 
 @media screen and (min-width: 1280px) {
@@ -16,8 +74,12 @@
   }
 
   .productInfo {
+    font-size: 14px;
+    padding: 8px;
   }
 
   .deleteButton {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
