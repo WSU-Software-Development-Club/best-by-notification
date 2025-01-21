@@ -189,8 +189,12 @@ def set_new_password():
     if not user:
       return jsonify({'error': f'User with email {email} not found'}), 404
     
-    if password:
-      user.set_password(password)
-      return jsonify({'message': 'Password reset successfully'}), 200
-    else:
-      return jsonify({'error': 'Password is required'}), 400
+    # Update and save the password securely
+    try:
+        user.set_password(password)  # Ensure this method securely hashes the password
+        user.reset_code = None  # Clear reset code after successful password change
+        user.reset_code_expiry = None
+        db.session.commit()
+        return jsonify({'message': 'Password reset successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': f'Failed to reset password: {str(e)}'}), 500
