@@ -25,8 +25,8 @@ const Modal = ({
           // onChange={(e) => setCategory(e.target.value)}
           className="inputField"
           value={productCategory}
-          onChange={(e) => setProductCategory(e.target.value)}
-        >
+          onChange={(e) => setProductCategory(e.target.value)}>
+            
           <option value="" disabled>
             Select Product Category
           </option>

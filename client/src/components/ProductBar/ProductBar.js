@@ -1,11 +1,39 @@
 import React from "react";
 import "./ProductBar.css";
 
+import poultry from "./../../assets/icons/chicken-leg-icon.png";
+import seafood from "./../../assets/icons/shrimp-icon.png";
+import dairy from "./../../assets/icons/milk-icon.png";
+import fruit from "./../../assets/icons/cherry-fruit-icon.png";
+import vegetables from "./../../assets/icons/carrot-vegetable-icon.png";
+import grains from "./../../assets/icons/rice-icon.png";
+import snacks from "./../../assets/icons/snacks-icon.png";
+import beverages from "./../../assets/icons/soda-with-straw-icon.png";
+import frozen from "./../../assets/icons/snowflake-icon.png";
+import other from "./../../assets/icons/image-photography-icon.png";
+
+const getCategoryIcons = (category) => {
+  const icons = {
+    poultry: poultry,
+    seafood: seafood,
+    dairy: dairy,
+    fruit: fruit,
+    vegetables: vegetables,
+    grains: grains,
+    snacks: snacks,
+    beverages: beverages,
+    frozen: frozen,
+    other: other,
+  };
+  return icons[category];
+};
+
 const ProductBar = ({
   productID,
   productName,
   expirationDate,
   productCategory,
+  onDeletion,
 }) => {
   const handleDeletion = async (event) => {
     event.preventDefault();
@@ -34,6 +62,7 @@ const ProductBar = ({
 
       if (response.ok) {
         alert(result.message);
+        onDeletion(); // Refresh the list of products
       } else {
         alert(`Error: ${result.error}`);
         console.log("Error deleting product:", result.error);
@@ -46,6 +75,9 @@ const ProductBar = ({
     }
   };
   const formatDate = (dateString) => {
+    if (!dateString) { // stuck here after parsing
+      return "No date provided";
+    } 
     // Try parsing the date using Date object
     const date = new Date(Date.parse(dateString)); // Convert to valid format
     if (isNaN(date)) {
@@ -58,8 +90,12 @@ const ProductBar = ({
       day: "2-digit", // '07'
     });
   };
+
+  const icons = getCategoryIcons(productCategory);
+
   return (
     <div className="productBar">
+      <img src={icons} alt={productCategory} className="categoryIcon"/>
       <div className="productInfo">
         <h3>{productName}</h3>
         <p>Category: {productCategory}</p>
