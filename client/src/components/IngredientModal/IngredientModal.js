@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./IngredientModal.css";
 
 import poultry from "./../../assets/icons/chicken-leg-icon.png";
@@ -32,6 +33,19 @@ const IngredientModal = ({ isOpen, toggleIngredientModal, products }) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [view, setView] = useState("ingredientSelection");
   const [recipes, setRecipes] = useState([]);
+  const navigate = useNavigate();
+
+  const handleRecipeClick = (recipe) => {
+    navigate(`/recipe/${recipe.id}`, {
+      state: { recipe, previousView: "recipeDisplay" },
+    });
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setView("ingredientSelection"); // Reset to default view when modal is opened
+    }
+  }, [isOpen]);
 
   const handleSelectProduct = (product) => {
     setSelectedProducts((prevSelected) => {
@@ -137,7 +151,11 @@ const IngredientModal = ({ isOpen, toggleIngredientModal, products }) => {
             <div className="ingredientBars">
               {recipes.length > 0 ? (
                 recipes.map((recipe, index) => (
-                  <div className="ingredientBar" key={index}>
+                  <div
+                    className="ingredientBar"
+                    key={index}
+                    onClick={() => handleRecipeClick(recipe)}
+                  >
                     <img
                       src={recipe.image}
                       alt={recipe.title}
