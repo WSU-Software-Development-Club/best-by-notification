@@ -39,48 +39,4 @@ function Welcome() {
   );
 }
 
-// const styles = Stylesheet.create({
-//   welcomeStyle: {
-//     backgroundColor: "#F0B289", // Background color
-//     height: "100vh", // Full viewport height
-//     width: "100vw", // Full viewport width
-//     display: "flex",
-//     justifyContent: "center",
-//     flexDirection: "column",
-//     alignItems: "center",
-//   },
-//   circleStyle: {
-//     width: "200px", // Diameter of the circle
-//     height: "200px", // Diameter of the circle
-//     backgroundColor: "white", // Circle background color
-//     borderRadius: "50%", // Make it circular
-//     display: "flex", // Use flexbox to center the logo inside the circle
-//     justifyContent: "center",
-//     alignItems: "center",
-//     border: "5px solid #AC8266",
-//     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", // Optional shadow for depth
-//   },
-//   textStyle: {
-//     fontFamily: "Rubik Doodle Shadow",
-//     color: "#FFFBFB",
-//     fontSize: "32px",
-//     alignItems: "center",
-//     display: "flex",
-//     flexDirection: "column",
-//     justifyContent: "center",
-//   },
-//   buttonStyle: {
-//     padding: "10px 20px", // Vertical and horizontal padding
-//     borderRadius: "30px", // Rounded corners
-//     border: "none", // Remove default border
-//     backgroundColor: "#FFDAC1", // Button background color
-//     color: "#985C35", // Text color
-//     fontSize: "32px", // Font size
-//     cursor: "pointer", // Change cursor on hover
-//     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)", // Darker shadow for depth
-//     transition: "background-color 0.3s, box-shadow 0.3s", // Smooth transition on hover
-//     fontFamily: "GothicA1-Regular",
-//   },
-// });
-
 export default Welcome;

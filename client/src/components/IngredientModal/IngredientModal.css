@@ -1,0 +1,176 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContainer {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 80%;
+  max-height: 70vh; /* Restrict modal height */
+  overflow-y: hidden;
+}
+
+.modalTitle {
+  font-family: GothicA1-Regular;
+  font-size: 5.5vw;
+  text-align: center;
+  position: sticky;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  position: sticky;
+  bottom: 0; /* Stick to the bottom of the modal container */
+  padding: 20px;
+  border-top: 1px solid #ddd; /* Optional: visual separation */
+  background-color: #f9f9f9; /* Distinct background color */
+  border-top: 2px solid #ddd; /* Bold visual separation */
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1); /* Optional: shadow effect for separation */
+}
+
+.modalActionButton {
+  padding: 8px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #000;
+  color: #fff;
+  flex: 1;
+}
+
+.modalActionButton:hover {
+  background-color: #333333;
+}
+
+.categoryIcon {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+}
+
+.productBars {
+  flex: 1; /* Take up available space between title and buttons */
+  overflow-y: auto; /* Make content scrollable */
+  padding: 10px 0;
+  margin-bottom: 15px; /* Space between list and buttons */
+  max-height: 50vh; /* Optional: control the max height of the product list */
+}
+
+/* Optional: Smooth scroll behavior */
+.productBars::-webkit-scrollbar {
+  width: 5px;
+}
+
+.productBars::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.productBars::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+.productBar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.productBar.selected {
+  background-color: #e0f7fa; /* Light cyan background for selected item */
+  border: 1px solid #00bcd4; /* Border color for selected item */
+}
+
+.productBar:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.productBar.selected:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Highlight on hover when selected */
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  flex-grow: 1;
+}
+
+.productInfo h3 {
+  font-family: GothicA1-Regular;
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.productInfo p {
+  font-family: GothicA1-Regular;
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+@media screen and (min-width: 1280px) {
+  .modalContainer {
+    padding: 1.5625vw;
+    padding-bottom: 5vh;
+    padding-top: 0.3vh;
+    border-radius: 1.5vw;
+    box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.1);
+    width: unset;
+    max-height: 80vh;
+  }
+
+  .modalTitle {
+    font-size: 3vw;
+    text-align: center;
+  }
+
+  .modalButtons {
+    padding-top: 3vh;
+  }
+
+  .modalActionButton {
+    padding: 1.25vh 1.25vw;
+    font-size: 1.2rem;
+    border-radius: 20px;
+  }
+
+  .signoutLinkStyle {
+    margin-top: 26vh;
+    text-align: end;
+    font-size: 20px;
+    color: #1877f2;
+  }
+
+  .productBar {
+    border: 1px solid black;
+    max-width: 40vw;
+  }
+
+  .productInfo {
+    font-size: 14px;
+    padding: 8px;
+  }
+}

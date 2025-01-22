@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "./../../assets/fonts/fonts.css";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Modal from "../../components/Modal/Modal";
 import ProductBar from "../../components/ProductBar/ProductBar";
@@ -13,7 +12,6 @@ function History() {
   const [expirationDate, setExpirationDate] = useState("");
   const [productCategory, setProductCategory] = useState("");
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
 
   // Handles opening/closing the modal
   const toggleModal = () => {
@@ -39,7 +37,9 @@ function History() {
       }
     } catch (error) {
       console.log("Error fetching products:", error);
-      alert("Failed to fetch products. Please try again later. Error: " + error);
+      alert(
+        "Failed to fetch products. Please try again later. Error: " + error
+      );
     }
   }, []);
 

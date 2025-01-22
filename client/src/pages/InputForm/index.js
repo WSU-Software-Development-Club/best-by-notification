@@ -1,22 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import "./../../assets/fonts/fonts.css";
 import Logo from "../../components/Logo/Logo";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Modal from "../../components/Modal/Modal";
+import IngredientModal from "../../components/IngredientModal/IngredientModal";
 import "./index.css";
 
 function InputForm() {
   // const [isLinkHovered, setIsLinkHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
   const [productName, setProductName] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [productCategory, setProductCategory] = useState("");
+  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
+  const fetchProducts = useCallback(async () => {
+    const userId = sessionStorage.getItem("userId");
+    const apiUrl = `${process.env.REACT_APP_API_BASE_URL}/user/${userId}/get_products`;
+
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      console.log("API Response:", data); // Check the structure of the response
+      if (response.ok) {
+        if (data) {
+          setProducts(data);
+        } else {
+          console.log("No products found.");
+        }
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.log("Error fetching products:", error);
+      alert(
+        "Failed to fetch products. Please try again later. Error: " + error
+      );
+    }
+  }, []);
+
+  // Fetch products when the ingredient modal is opened
+  useEffect(() => {
+    if (isIngredientModalOpen) {
+      fetchProducts();
+    }
+  }, [isIngredientModalOpen, fetchProducts]);
 
   // Handles opening/closing the modal
   const toggleModal = () => {
+    if (isIngredientModalOpen) {
+      setIsIngredientModalOpen(!isIngredientModalOpen);
+    }
     setIsModalOpen(!isModalOpen);
+  };
+
+  const toggleIngredientModal = () => {
+    if (isModalOpen) {
+      setIsModalOpen(!isModalOpen);
+    }
+    setIsIngredientModalOpen(!isIngredientModalOpen);
   };
 
   // Handles form submission
@@ -56,6 +101,7 @@ function InputForm() {
 
       if (response.ok) {
         alert(data.message); // Success message
+        fetchProducts();
         // toggleModal(); //// Close the modal (Optional)
       } else {
         alert(`Error: ${data.error}`); // Error message
@@ -103,104 +149,21 @@ function InputForm() {
         expirationDate={expirationDate}
         setExpirationDate={setExpirationDate}
       />
+
+      {/* Ingredient Modal Component*/}
+      <IngredientModal
+        isOpen={isIngredientModalOpen}
+        toggleIngredientModal={toggleIngredientModal}
+        products={products} // Pass the products to the modal
+      />
+
       {/* Bottom Navbar */}
-      <Navbar toggleModal={toggleModal} />
+      <Navbar
+        toggleModal={toggleModal}
+        toggleIngredientModal={toggleIngredientModal}
+      />
     </div>
   );
 }
-
-// const styles = Stylesheet.create({
-//   appTitleStyle: {
-//     fontFamily: "GothicA1-Regular",
-//     borderBottom: "3px solid black",
-//     fontSize: "8vw",
-//   },
-//   homeTitleStyle: {
-//     fontFamily: "GothicA1-Regular",
-//     marginBottom: "5vh",
-//     marginTop: "-1vh",
-//     fontSize: "8vw",
-//   },
-//   homeContainerStyle: {
-//     alignItems: "center",
-//     flexDirection: "column",
-//     display: "flex",
-//     justifyContent: "center",
-//     marginTop: "4vh",
-//   },
-//   signoutLinkStyle: {
-//     marginTop: "44vh",
-//     textAlign: "end",
-//     color: "#1877F2",
-//   },
-//   signoutLink: {
-//     textDecoration: "none",
-//     color: "inherit",
-//   },
-//   signoutLinkHover: {
-//     textDecoration: "underline",
-//   },
-//   buttonContainer: {
-//     marginTop: "4vh",
-//     display: "flex",
-//     gap: "10px",
-//   },
-//   actionButton: {
-//     padding: "5px 30px",
-//     fontSize: "1rem",
-//     cursor: "pointer",
-//     borderRadius: "12px",
-//     border: "1px solid #ccc",
-//     backgroundColor: "#000",
-//     color: "#FFF",
-//     flex: 1,
-//   },
-//   modalOverlay: {
-//     position: "fixed",
-//     top: 0,
-//     left: 0,
-//     width: "100vw",
-//     height: "100vh",
-//     backgroundColor: "rgba(0, 0, 0, 0.5)",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   modalContainer: {
-//     backgroundColor: "#fff",
-//     padding: "20px",
-//     borderRadius: "8px",
-//     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-//   },
-//   inputField: {
-//     margin: "10px 0",
-//     padding: "8px",
-//     width: "93%",
-//     borderRadius: "8px",
-//     border: "1px solid #cccc",
-//     fontFamily: "GothicA1-Regular",
-//   },
-//   modalTitle: {
-//     fontFamily: "GothicA1-Regular",
-//     fontSize: "5.5vw",
-//     textAlign: "center",
-//   },
-//   modalButtons: {
-//     display: "flex",
-//     justifyContent: "space-between",
-//     marginTop: "10px",
-//     gap: "45px",
-//   },
-//   modalActionButton: {
-//     padding: "8px 10px",
-//     fontSize: "1rem",
-//     cursor: "pointer",
-//     borderRadius: "12px",
-//     border: "1px solid #ccc",
-//     backgroundColor: "#000",
-//     color: "#FFF",
-//     flex: 1,
-//   },
-// });
 
 export default InputForm;

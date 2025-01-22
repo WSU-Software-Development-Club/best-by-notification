@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css"; // Assuming you are using the same CSS file for Navbar
 
-const Navbar = ({ toggleModal }) => {
+const Navbar = ({ toggleModal, toggleIngredientModal }) => {
   const navigate = useNavigate();
 
   // Logout handler
@@ -37,7 +37,10 @@ const Navbar = ({ toggleModal }) => {
         Add Product
       </button>
       <button className="navbarButton" onClick={() => navigate("/History")}>
-        View Database
+        View Your Products
+      </button>
+      <button className="navbarButton" onClick={toggleIngredientModal}>
+        Find Recipes
       </button>
       <button className="navbarButton" onClick={handleLogout}>
         {/* <Link className="signoutLink">Sign Out</Link> */}
