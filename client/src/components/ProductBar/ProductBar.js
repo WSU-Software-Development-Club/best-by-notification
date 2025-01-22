@@ -4,7 +4,7 @@ import "./ProductBar.css";
 import poultry from "./../../assets/icons/chicken-leg-icon.png";
 import seafood from "./../../assets/icons/seafood-icon.png";
 import dairy from "./../../assets/icons/milk-icon.png";
-import fruit from "./../../assets/icons/fruit-basket-icon.png";
+import fruits from "./../../assets/icons/fruit-basket-icon.png";
 import vegetables from "./../../assets/icons/carrot-vegetable-icon.png";
 import grains from "./../../assets/icons/rice-icon.png";
 import snacks from "./../../assets/icons/snacks-icon.png";
@@ -17,7 +17,7 @@ const getCategoryIcons = (category) => {
     poultry: poultry,
     seafood: seafood,
     dairy: dairy,
-    fruits: fruit,
+    fruits: fruits,
     vegetables: vegetables,
     grains: grains,
     snacks: snacks,
