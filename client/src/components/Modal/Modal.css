@@ -17,12 +17,15 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   width: 80%;
+  max-height: 70vh; /* Restrict modal height */
+  overflow-y: hidden;
 }
 
 .modalTitle {
   font-family: GothicA1-Regular;
   font-size: 5.5vw;
   text-align: center;
+  position: sticky;
 }
 
 .inputField {
@@ -38,8 +41,14 @@
 .modalButtons {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
-  gap: 45px;
+  gap: 20px;
+  position: sticky;
+  bottom: 0; /* Stick to the bottom of the modal container */
+  padding: 20px;
+  border-top: 1px solid #ddd; /* Optional: visual separation */
+  background-color: #f9f9f9; /* Distinct background color */
+  border-top: 2px solid #ddd; /* Bold visual separation */
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1); /* Optional: shadow effect for separation */
 }
 
 .modalActionButton {
@@ -65,6 +74,7 @@
     border-radius: 1.5vw;
     box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.1);
     width: unset;
+    max-height: 80vh;
   }
 
   .modalTitle {

@@ -1,4 +1,4 @@
-.modalOverlay {
+.ingredientModalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-.modalContainer {
+.ingredientModalContainer {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -62,7 +62,12 @@
   margin-right: 20px;
 }
 
-.productBars {
+.recipeImage {
+  border-radius: 15px;
+  width: 30vw;
+}
+
+.ingredientBars {
   flex: 1; /* Take up available space between title and buttons */
   overflow-y: auto; /* Make content scrollable */
   padding: 10px 0;
@@ -71,20 +76,20 @@
 }
 
 /* Optional: Smooth scroll behavior */
-.productBars::-webkit-scrollbar {
+.ingredientBars::-webkit-scrollbar {
   width: 5px;
 }
 
-.productBars::-webkit-scrollbar-thumb {
+.ingredientBars::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 4px;
 }
 
-.productBars::-webkit-scrollbar-thumb:hover {
+.ingredientBars::-webkit-scrollbar-thumb:hover {
   background-color: #aaa;
 }
 
-.productBar {
+.ingredientBar {
   display: flex;
   align-items: center;
   border: 1px solid #e0e0e0;
@@ -96,35 +101,35 @@
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-.productBar.selected {
+.ingredientBar.selected {
   background-color: #e0f7fa; /* Light cyan background for selected item */
   border: 1px solid #00bcd4; /* Border color for selected item */
 }
 
-.productBar:hover {
+.ingredientBar:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
 
-.productBar.selected:hover {
+.ingredientBar.selected:hover {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Highlight on hover when selected */
 }
 
-.productInfo {
+.ingredientInfo {
   display: flex;
   flex-direction: column;
   padding: 0 15px;
   flex-grow: 1;
 }
 
-.productInfo h3 {
+.ingredientInfo h3 {
   font-family: GothicA1-Regular;
   margin: 0 0 10px 0;
   font-size: 18px;
   color: #333;
 }
 
-.productInfo p {
+.ingredientInfo p {
   font-family: GothicA1-Regular;
   margin: 5px 0;
   font-size: 14px;
@@ -132,7 +137,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .modalContainer {
+  .ingredientModalContainer {
     padding: 1.5625vw;
     padding-bottom: 5vh;
     padding-top: 0.3vh;
@@ -164,13 +169,18 @@
     color: #1877f2;
   }
 
-  .productBar {
+  .ingredientBar {
     border: 1px solid black;
-    max-width: 40vw;
+    width: 40vw;
   }
 
-  .productInfo {
+  .ingredientInfo {
     font-size: 14px;
     padding: 8px;
+  }
+
+  .recipeImage {
+    width: 260px;
+    margin-right: 20px;
   }
 }

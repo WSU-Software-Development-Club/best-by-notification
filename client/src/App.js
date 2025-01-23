@@ -9,6 +9,7 @@ import ForgotPasswordForm from "./pages/ForgotPasswordForm";
 import History from "./pages/History";
 import TokenVerifyForm from "./pages/TokenVerifyForm";
 import ResetPasswordForm from "./pages/ResetPasswordForm";
+import RecipeDetail from "./pages/RecipeDetail";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/TokenVerifyForm" element={<TokenVerifyForm />} />
         <Route path="/ResetPasswordForm" element={<ResetPasswordForm />} />
         <Route path="/History" element={<History />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
       </Routes>
     </Router>
   );
