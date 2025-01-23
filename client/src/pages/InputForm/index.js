@@ -12,7 +12,7 @@ function InputForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
   const [productName, setProductName] = useState("");
-  const [expirationDate, setExpirationDate] = useState("");
+  const [expirationDate, setExpirationDate] = useState(null);
   const [productCategory, setProductCategory] = useState("");
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
@@ -101,15 +101,15 @@ function InputForm() {
 
       if (response.ok) {
         alert(data.message); // Success message
+        alert(expirationDate);
+        alert(data.expiration_date);
         fetchProducts();
-        // toggleModal(); //// Close the modal (Optional)
       } else {
         alert(`Error: ${data.error}`); // Error message
       }
     } catch (error) {
       console.log("Error adding product:", error);
       alert("Failed to add product. Please try again later. Error: " + error);
-      alert(`User ID: ${userId}`); // Debugging
     }
 
     // Clear inputs after submission
@@ -154,7 +154,7 @@ function InputForm() {
       <IngredientModal
         isOpen={isIngredientModalOpen}
         toggleIngredientModal={toggleIngredientModal}
-        products={products} // Pass the products to the modal
+        products={products}
       />
 
       {/* Bottom Navbar */}
