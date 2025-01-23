@@ -3,19 +3,31 @@ import "./../../assets/fonts/fonts.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Modal from "../../components/Modal/Modal";
 import ProductBar from "../../components/ProductBar/ProductBar";
+import IngredientModal from "../../components/IngredientModal/IngredientModal";
 import "./index.css";
 
 function History() {
   // const [isLinkHovered, setIsLinkHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
   const [productName, setProductName] = useState("");
-  const [expirationDate, setExpirationDate] = useState("");
+  const [expirationDate, setExpirationDate] = useState(null);
   const [productCategory, setProductCategory] = useState("");
   const [products, setProducts] = useState([]);
 
   // Handles opening/closing the modal
   const toggleModal = () => {
+    if (isIngredientModalOpen) {
+      setIsIngredientModalOpen(!isIngredientModalOpen);
+    }
     setIsModalOpen(!isModalOpen);
+  };
+
+  const toggleIngredientModal = () => {
+    if (isModalOpen) {
+      setIsModalOpen(!isModalOpen);
+    }
+    setIsIngredientModalOpen(!isIngredientModalOpen);
   };
 
   const fetchProducts = useCallback(async () => {
@@ -80,7 +92,6 @@ function History() {
 
       if (response.ok) {
         alert(data.message); // Success message
-        toggleModal(); //// Close the modal (Optional)
         await fetchProducts(); // Fetch products again to update the list
       } else {
         alert(`Error: ${data.error}`); // Error message
@@ -97,6 +108,7 @@ function History() {
     setProductCategory("");
   };
 
+  // Fetch products for ProductBar
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -119,6 +131,13 @@ function History() {
         setExpirationDate={setExpirationDate}
       />
 
+      {/* Ingredient Modal Component*/}
+      <IngredientModal
+        isOpen={isIngredientModalOpen}
+        toggleIngredientModal={toggleIngredientModal}
+        products={products}
+      />
+
       {/* Render Product Bars */}
       <div className="productBars">
         {products.length === 0 ? (
@@ -138,7 +157,10 @@ function History() {
       </div>
 
       {/* Bottom Navbar */}
-      <Navbar toggleModal={toggleModal} />
+      <Navbar
+        toggleModal={toggleModal}
+        toggleIngredientModal={toggleIngredientModal}
+      />
     </div>
   );
 }

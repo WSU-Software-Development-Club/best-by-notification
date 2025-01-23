@@ -80,12 +80,11 @@ const ProductBar = ({
       return "No date provided";
     }
     // Try parsing the date using Date object
-    const date = new Date(Date.parse(dateString)); // Convert to valid format
-    if (isNaN(date)) {
+    const date = new Date(dateString); // Convert to valid format
+    if (isNaN(date.getTime)) {
       return "Invalid Date"; // Handle errors
     }
     return date.toLocaleDateString("en-US", {
-      weekday: "short", // 'Tue'
       year: "numeric", // '2025'
       month: "short", // 'Jan'
       day: "2-digit", // '07'
