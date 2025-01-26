@@ -1,13 +1,13 @@
-import poultry from "../assets/icons/chicken-leg-icon.png";
-import seafood from "../assets/icons/seafood-icon.png";
-import dairy from "../assets/icons/milk-icon.png";
-import fruits from "../assets/icons/fruit-basket-icon.png";
-import vegetables from "../assets/icons/carrot-vegetable-icon.png";
-import grains from "../assets/icons/rice-icon.png";
-import snacks from "../assets/icons/snacks-icon.png";
-import beverages from "../assets/icons/soda-with-straw-icon.png";
-import frozen from "../assets/icons/snowflake-icon.png";
-import other from "../assets/icons/image-photography-icon.png";
+import poultry from "../assets/icons/colored/poultry-icon.png";
+import seafood from "../assets/icons/colored/seafood-icon.png";
+import dairy from "../assets/icons/colored/milk-icon.png";
+import fruits from "../assets/icons/colored/fruit-icon.png";
+import vegetables from "../assets/icons/colored/vegetable-icon.png";
+import grains from "../assets/icons/colored/grain-icon.png";
+import snacks from "../assets/icons/colored/snacks-icon.png";
+import beverages from "../assets/icons/colored/drink-icon.png";
+import frozen from "../assets/icons/colored/snowflake-icon.png";
+import other from "../assets/icons/uncolored/image-photography-icon.png";
 
 const categoryIcons = {
   poultry,

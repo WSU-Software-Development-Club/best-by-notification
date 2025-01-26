@@ -39,8 +39,22 @@
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Blue focus ring */
 }
 
+.homeIcon {
+  width: 0px; /* Adjust size */
+  height: 0px; /* Adjust size */
+  margin-top: 10px;
+  cursor: pointer; /* Makes it clear the icon is clickable */
+}
+
 /* Sidebar Styles for Larger Screens */
 @media screen and (min-width: 1280px) {
+  .homeIcon {
+    width: 100px; /* Adjust size */
+    height: 100px; /* Adjust size */
+    cursor: pointer; /* Makes it clear the icon is clickable */
+    margin-right: 20px; /* Space between icon and the first button */
+  }
+
   .bottomNavbar {
     position: fixed;
     bottom: unset;

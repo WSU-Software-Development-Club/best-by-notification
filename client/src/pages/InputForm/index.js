@@ -101,8 +101,6 @@ function InputForm() {
 
       if (response.ok) {
         alert(data.message); // Success message
-        alert(expirationDate);
-        alert(data.expiration_date);
         fetchProducts();
       } else {
         alert(`Error: ${data.error}`); // Error message
@@ -133,7 +131,7 @@ function InputForm() {
           Add Product
         </button>
         <button className="actionButton" onClick={() => navigate("/History")}>
-          View Database
+          View Your Products
         </button>
       </div>
 

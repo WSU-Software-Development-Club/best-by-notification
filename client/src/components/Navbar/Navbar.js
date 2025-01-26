@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import eggIcon from "../../assets/images/fried-egg.png"; // Import the icon
 import "./Navbar.css"; // Assuming you are using the same CSS file for Navbar
 
 const Navbar = ({ toggleModal, toggleIngredientModal }) => {
@@ -33,6 +34,13 @@ const Navbar = ({ toggleModal, toggleIngredientModal }) => {
 
   return (
     <div className="bottomNavbar">
+      {/* Icon for navigating to home */}
+      <img
+        src={eggIcon}
+        alt="Home"
+        className="homeIcon"
+        onClick={() => navigate("/InputForm")} // Clicking icon takes to home page
+      />
       <button className="navbarButton" onClick={toggleModal}>
         Add Product
       </button>

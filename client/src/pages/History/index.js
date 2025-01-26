@@ -92,7 +92,6 @@ function History() {
 
       if (response.ok) {
         alert(data.message); // Success message
-        alert(expirationDate);
         await fetchProducts(); // Fetch products again to update the list
       } else {
         alert(`Error: ${data.error}`); // Error message
