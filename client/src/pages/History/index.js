@@ -122,21 +122,16 @@ function History() {
         {products.length === 0 ? (
           <p>No products found.</p>
         ) : (
-          products.map(
-            (product, index) => (
-              console.log("Product's exp: ", product.expiration_date),
-              (
-                <ProductBar
-                  key={product.id}
-                  productID={product.id}
-                  productName={product.name}
-                  productCategory={product.category}
-                  expirationDate={product["expiration date"]}
-                  onDeletion={fetchProducts}
-                ></ProductBar>
-              )
-            )
-          )
+          products.map((product, index) => (
+            <ProductBar
+              key={product.id}
+              productID={product.id}
+              productName={product.name}
+              productCategory={product.category}
+              expirationDate={product["expiration date"]}
+              onDeletion={fetchProducts}
+            ></ProductBar>
+          ))
         )}
       </div>
 

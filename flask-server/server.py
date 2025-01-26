@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 from flask_cors import CORS
@@ -15,7 +15,8 @@ import os
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)  # Initialize Bcrypt with the app
-CORS(app, supports_credentials=True, origins=["http://192.168.0.101:3000", "http://localhost:3000"]) # Allows cross-origin requests from React frontend
+# CORS(app, supports_credentials=True, origins=["http://192.168.0.101:3000", "http://localhost:3000"]) # Allows cross-origin requests from React frontend
+CORS(app, supports_credentials=True, origins=["http://localhost:3000", "http://192.168.0.101:3000"])
 mail = Mail(app) # instantiate the mail class 
 # app.secret_key = secrets.token_hex(32) # 32 bytes = 64-character hex string
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
@@ -118,6 +119,10 @@ def send_email_notification(user_email, product, status, action):
 
 # Start the expiration checking thread:
 check_expiring_products()  
+
+@app.route('/')
+def hello():
+    return "Hello from the Best-By app Backend."
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=5000, debug=True)
