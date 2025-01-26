@@ -71,7 +71,11 @@ def login():
   password = data.get('password')
   
   user = User.query.filter_by(email=email).first()
-  if user and user.check_password(password):
+  if not user:
+    return jsonify({'error': 'User not found'}), 404
+  if not user.check_password(password):
+    return jsonify({'error': 'Invalid password'}), 401
+  else:
     login_user(user)
     return jsonify({
       'message': 'Login successful',
@@ -80,8 +84,6 @@ def login():
           'email': user.email
       }
     }), 200
-  else:
-    return jsonify({'error': 'Invalid email or password'}), 401
   
 @users_bp.route('/current_user', methods=['GET'])
 @login_required

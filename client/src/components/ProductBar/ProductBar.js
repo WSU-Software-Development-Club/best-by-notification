@@ -1,32 +1,7 @@
 import React from "react";
+import { formatDate } from "../../utils/dateFormatter";
+import { getCategoryIcon } from "../../utils/icons"; // Use the centralized function
 import "./ProductBar.css";
-
-import poultry from "./../../assets/icons/chicken-leg-icon.png";
-import seafood from "./../../assets/icons/seafood-icon.png";
-import dairy from "./../../assets/icons/milk-icon.png";
-import fruits from "./../../assets/icons/fruit-basket-icon.png";
-import vegetables from "./../../assets/icons/carrot-vegetable-icon.png";
-import grains from "./../../assets/icons/rice-icon.png";
-import snacks from "./../../assets/icons/snacks-icon.png";
-import beverages from "./../../assets/icons/soda-with-straw-icon.png";
-import frozen from "./../../assets/icons/snowflake-icon.png";
-import other from "./../../assets/icons/image-photography-icon.png";
-
-const getCategoryIcons = (category) => {
-  const icons = {
-    poultry: poultry,
-    seafood: seafood,
-    dairy: dairy,
-    fruits: fruits,
-    vegetables: vegetables,
-    grains: grains,
-    snacks: snacks,
-    beverages: beverages,
-    frozen: frozen,
-    other: other,
-  };
-  return icons[category];
-};
 
 const ProductBar = ({
   productID,
@@ -74,24 +49,8 @@ const ProductBar = ({
       );
     }
   };
-  const formatDate = (dateString) => {
-    if (!dateString) {
-      // stuck here after parsing
-      return "No date provided";
-    }
-    // Try parsing the date using Date object
-    const date = new Date(dateString); // Convert to valid format
-    if (isNaN(date.getTime)) {
-      return "Invalid Date"; // Handle errors
-    }
-    return date.toLocaleDateString("en-US", {
-      year: "numeric", // '2025'
-      month: "short", // 'Jan'
-      day: "2-digit", // '07'
-    });
-  };
 
-  const icons = getCategoryIcons(productCategory);
+  const icons = getCategoryIcon(productCategory);
 
   return (
     <div className="productBar">
