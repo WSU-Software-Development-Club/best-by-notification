@@ -11,6 +11,9 @@
 # production
 /build
 
+# Ignore .env file specific to backend
+.env
+
 # misc
 .DS_Store
 .env.local
