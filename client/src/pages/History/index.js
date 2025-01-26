@@ -11,7 +11,7 @@ function History() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
   const [productName, setProductName] = useState("");
-  const [expirationDate, setExpirationDate] = useState(null);
+  const [expirationDate, setExpirationDate] = useState("");
   const [productCategory, setProductCategory] = useState("");
   const [products, setProducts] = useState([]);
 
@@ -92,6 +92,7 @@ function History() {
 
       if (response.ok) {
         alert(data.message); // Success message
+        alert(expirationDate);
         await fetchProducts(); // Fetch products again to update the list
       } else {
         alert(`Error: ${data.error}`); // Error message
@@ -111,7 +112,7 @@ function History() {
   // Fetch products for ProductBar
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   return (
     <div className="historyContainerStyle">
@@ -143,16 +144,21 @@ function History() {
         {products.length === 0 ? (
           <p>No products found.</p>
         ) : (
-          products.map((product, index) => (
-            <ProductBar
-              key={product.id}
-              productID={product.id}
-              productName={product.name}
-              productCategory={product.category}
-              expirationDate={product.expiration_date}
-              onDeletion={fetchProducts}
-            ></ProductBar>
-          ))
+          products.map(
+            (product, index) => (
+              console.log("Product's exp: ", product.expiration_date),
+              (
+                <ProductBar
+                  key={product.id}
+                  productID={product.id}
+                  productName={product.name}
+                  productCategory={product.category}
+                  expirationDate={product["expiration date"]}
+                  onDeletion={fetchProducts}
+                ></ProductBar>
+              )
+            )
+          )
         )}
       </div>
 

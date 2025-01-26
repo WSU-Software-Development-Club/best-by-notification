@@ -12,7 +12,7 @@ function InputForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
   const [productName, setProductName] = useState("");
-  const [expirationDate, setExpirationDate] = useState(null);
+  const [expirationDate, setExpirationDate] = useState("");
   const [productCategory, setProductCategory] = useState("");
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();

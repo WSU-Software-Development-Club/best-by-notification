@@ -19,25 +19,24 @@ def add_product_for_user(user_id):
   if not name or not expiration_date or not category:
     return jsonify({'error': 'Name, expiration date, and category are required.'}), 400
   
-    # Validate category (can expand this list as needed)
+  # Validate category (can expand this list as needed)
   valid_categories = ['poultry', 'seafood', 'dairy', 'fruits', 'vegetables', 'grains', 'snacks', 'beverages', 'frozen', 'other']
   if category not in valid_categories:
     return jsonify({'error': 'Invalid category. Please select a valid category. Yours:' + category}), 400
   
   user = User.query.get(user_id)
-  
   # If user not found
   if not user:
     return jsonify({'error': f'User with id {user_id} not found'}), 404
   
   # Else
   try:
-    expiration_date = datetime.strptime(expiration_date, '%Y-%m-%d')
+    expiration_date_obj = datetime.strptime(expiration_date, '%Y-%m-%d').date()
   except ValueError:
     return jsonify({'error': 'Invalid date format. Use YYYY-MM-DD'}), 400
   
   # Add product for user:
-  new_product = Product(name=name, category=category, expiration_date=expiration_date, user_id=user_id)
+  new_product = Product(name=name, category=category, expiration_date=expiration_date_obj, user_id=user_id)
   db.session.add(new_product)
   db.session.commit()
   

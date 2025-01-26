@@ -1,33 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from "../../utils/dateFormatter";
+import { getCategoryIcon } from "../../utils/icons"; // Use the centralized function
 import "./IngredientModal.css";
-
-import poultry from "./../../assets/icons/chicken-leg-icon.png";
-import seafood from "./../../assets/icons/seafood-icon.png";
-import dairy from "./../../assets/icons/milk-icon.png";
-import fruits from "./../../assets/icons/fruit-basket-icon.png";
-import vegetables from "./../../assets/icons/carrot-vegetable-icon.png";
-import grains from "./../../assets/icons/rice-icon.png";
-import snacks from "./../../assets/icons/snacks-icon.png";
-import beverages from "./../../assets/icons/soda-with-straw-icon.png";
-import frozen from "./../../assets/icons/snowflake-icon.png";
-import other from "./../../assets/icons/image-photography-icon.png";
-
-const getCategoryIcons = (category) => {
-  const icons = {
-    poultry: poultry,
-    seafood: seafood,
-    dairy: dairy,
-    fruits: fruits,
-    vegetables: vegetables,
-    grains: grains,
-    snacks: snacks,
-    beverages: beverages,
-    frozen: frozen,
-    other: other,
-  };
-  return icons[category];
-};
 
 const IngredientModal = ({ isOpen, toggleIngredientModal, products }) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -113,14 +88,14 @@ const IngredientModal = ({ isOpen, toggleIngredientModal, products }) => {
                     onClick={() => handleSelectProduct(product)}
                   >
                     <img
-                      src={getCategoryIcons(product.category)}
+                      src={getCategoryIcon(product.category)}
                       alt={product.category}
                       className="categoryIcon"
                     />
                     <div className="ingredientInfo">
                       <h3>{product.name}</h3>
                       <p>Category: {product.category}</p>
-                      <p>Expires: {product.expiration_date}</p>
+                      <p>Expires: {formatDate(product["expiration date"])}</p>
                       {/* Add more product details if needed */}
                     </div>
                   </div>
