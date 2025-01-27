@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://best-by-notification.onrender.com/client",
+  "homepage": "https://best-by-notification.onrender.com/",
   "proxy": "http://backend:5000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
