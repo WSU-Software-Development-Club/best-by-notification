@@ -1,14 +1,8 @@
-# Use Alpine as the base image
-FROM alpine:3.20
-
-# Set the Node.js version to install
-ENV NODE_VERSION=22.13.1
+# Stage 1: Build the React app
+FROM node:18 as build
 
 # Set the working directory
 WORKDIR /app
-
-# Install Node.js and npm
-RUN apk add --no-cache nodejs npm
 
 # Copy package.json and package-lock.json into the container
 COPY package*.json ./
@@ -19,11 +13,17 @@ RUN npm install
 # Copy the rest of the application into the container
 COPY . .
 
-# Build the app
+# Build the app for production
 RUN npm run build
 
-# Expose the application port
-EXPOSE 3000
+# Stage 2: Serve the React app using a lightweight server
+FROM nginx:alpine
 
-# Start the application
-CMD ["npm", "run", "start"]
+# Copy the production build from Stage 1
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80 for the nginx server
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
