@@ -17,6 +17,8 @@ services:
   frontend:
     build:
       context: ./client
+      args:
+        REACT_APP_API_BASE_URL: "https://best-by-notification-back-end.onrender.com/" # Pass as build arg
     container_name: react-frontend
     ports:
       - "3000:3000"

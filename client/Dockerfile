@@ -1,29 +1,27 @@
-# Stage 1: Build the React app
+# Base image
 FROM node:18 as build
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json into the container
-COPY package*.json ./
-
 # Install dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the rest of the application into the container
+# Copy the source code
 COPY . .
 
-# Build the app for production
+# Pass build argument to React build process
+ARG REACT_APP_API_BASE_URL
+ENV REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}
+
+# Build React app
 RUN npm run build
 
-# Stage 2: Serve the React app using a lightweight server
+# Use a lightweight web server to serve the built files
 FROM nginx:alpine
-
-# Copy the production build from Stage 1
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose port 80 for the nginx server
+# Expose port
 EXPOSE 80
-
-# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
