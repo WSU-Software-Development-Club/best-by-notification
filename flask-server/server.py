@@ -16,7 +16,7 @@ import os
 app = Flask(__name__)
 bcrypt = Bcrypt(app)  # Initialize Bcrypt with the app
 # CORS(app, supports_credentials=True, origins=["http://192.168.0.101:3000", "http://localhost:3000"]) # Allows cross-origin requests from React frontend
-CORS(app, supports_credentials=True, origins=["http://localhost:3000", "http://192.168.0.101:3000"])
+CORS(app, supports_credentials=True, origins=["http://localhost:3000", "http://192.168.0.101:3000", "https://best-by-notification.onrender.com"])
 mail = Mail(app) # instantiate the mail class 
 # app.secret_key = secrets.token_hex(32) # 32 bytes = 64-character hex string
 app.secret_key = os.getenv('FLASK_SECRET_KEY')

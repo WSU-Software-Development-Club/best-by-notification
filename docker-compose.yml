@@ -6,7 +6,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      FLASK_APP_API_BASE_URL: "https://best-by-notification.onrender.com/" # Backend API URL for the frontend
+      FLASK_APP_API_BASE_URL: "https://best-by-notification.onrender.com" # Backend API URL for the frontend
       FLASK_SECRET_KEY: "381806719b87962eb5d3f8aabe2c83823499a18974d882fa84ea62834e925583"
       FLASK_ENV: "development"
     depends_on:
@@ -18,12 +18,12 @@ services:
     build:
       context: ./client
       args:
-        REACT_APP_API_BASE_URL: "https://best-by-notification-back-end.onrender.com/" # Pass as build arg
+        REACT_APP_API_BASE_URL: "https://best-by-notification-back-end.onrender.com" # Pass as build arg
     container_name: react-frontend
     ports:
       - "3000:3000"
     environment:
-      REACT_APP_API_BASE_URL: "https://best-by-notification-back-end.onrender.com/" # Frontend API URL for the backend
+      REACT_APP_API_BASE_URL: "https://best-by-notification-back-end.onrender.com" # Frontend API URL for the backend
     networks:
       - app-network
 
