@@ -38,6 +38,17 @@
   transition: all 0.3s ease;
 }
 
+.homeIcon:hover {
+  transform: scale(1.1); 
+  opacity: 0.9; 
+  filter: brightness(1.1); 
+}
+
+/* For extra interactivity */
+.homeIcon:active {
+  transform: scale(0.95);
+}
+
 /* Navigation Items */
 .navItems {
   flex: 1;

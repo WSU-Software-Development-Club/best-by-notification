@@ -47,10 +47,8 @@ const Navbar = ({ toggleModal, toggleIngredientModal }) => {
           className="homeIcon"
           onClick={() => navigate("/InputForm")}
         />
-        {!isCollapsed && <span className="logoText">Best by notification</span>}
+        {!isCollapsed && <span className="logoText">Best by Notification</span>}
       </div>
-      
-      <div className="navSeparator"></div>
 
       <div className="navItems">
         <button className="navbarButton" onClick={toggleModal}>
