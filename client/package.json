@@ -12,7 +12,7 @@
     "react-bootstrap": "^2.10.5",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "reactjs-stylesheet": "^1.0.9",
     "web-vitals": "^2.1.4"
   },
