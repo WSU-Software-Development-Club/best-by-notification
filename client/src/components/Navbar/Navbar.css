@@ -1,84 +1,182 @@
-/* Bottom Navbar Styles */
+/* Main Navigation Container */
 .bottomNavbar {
   position: fixed;
-  bottom: 0;
   left: 0;
-  width: 100%;
-  background-color: #202020;
+  top: 0;
+  width: 240px;
+  height: 100vh;
+  background-color: #2d2d2d;
   display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
+  flex-direction: column;
+  padding: 20px 0;
   z-index: 1000;
-  gap: 0.781vw;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+  transition: width 0.3s ease;
+  overflow: hidden;
 }
 
-.navbarButton {
-  padding: 10px 20px;
-  font-size: 1rem;
+/* Logo Section */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  padding: 0 20px 20px;
+  margin: 0 15px 20px;
+  border-bottom: 1px solid #404040;
+}
+
+.logoText {
   color: #fff;
-  background-color: #000;
-  border: 2px solid #404040;
-  border-radius: 15px;
-  cursor: pointer;
-  text-align: center;
-  /* flex-grow: 1; */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow to make the button pop */
-  transition: all 0.3s ease;
-}
-
-.navbarButton:hover {
-  background-color: #333333; /* Darker tone on hover */
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* More prominent shadow */
-  transform: translateY(-2px); /* Slight pop-out effect */
-  border-color: #ccc; /* Lighter border color on hover */
-}
-
-/* Optional: Focus state for better accessibility */
-.navbarButton:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Blue focus ring */
+  font-size: 1.1rem;
+  margin-left: 15px;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
 }
 
 .homeIcon {
-  width: 0px; /* Adjust size */
-  height: 0px; /* Adjust size */
-  margin-top: 10px;
-  cursor: pointer; /* Makes it clear the icon is clickable */
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
 }
 
-/* Sidebar Styles for Larger Screens */
-@media screen and (min-width: 1280px) {
-  .homeIcon {
-    width: 100px; /* Adjust size */
-    height: 100px; /* Adjust size */
-    cursor: pointer; /* Makes it clear the icon is clickable */
-    margin-right: 20px; /* Space between icon and the first button */
+/* Navigation Items */
+.navItems {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 10px;
+}
+
+.navbarButton {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #e0e0e0;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.navbarButton:hover {
+  background-color: grey;
+  transform: translateX(3px);
+}
+
+.navbarButton:hover .navIcon {
+  filter: invert(1);
+  transform: scale(1.1);
+}
+
+.navbarButton:hover span {
+  color: #fff;
+}
+
+.navbarButton span {
+  transition: opacity 0.3s ease, margin-left 0.3s ease;
+}
+
+.navIcon {
+  width: 22px;
+  height: 22px;
+  margin-right: 18px; 
+  filter: invert(0.85);
+  transition: all 0.3s ease;
+}
+
+/* Toggle Button Hover Effects */
+.toggleButton {
+  position: absolute;
+  bottom: 40px; /* Increased from 15px */
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggleButton img {
+  width: 16px;
+  height: 16px;
+  filter: invert(0.85);
+  transition: all 0.3s ease;
+}
+
+.toggleButton:hover {
+  background-color: #3a3a3a;
+  border-radius: 4px;
+}
+
+.toggleButton:hover img {
+  filter: invert(0.7);
+}
+
+/* Collapsed State */
+.bottomNavbar.collapsed {
+  width: 80px;
+}
+
+.bottomNavbar.collapsed .logoText,
+.bottomNavbar.collapsed .navbarButton span {
+  opacity: 0;
+  margin-left: -10px;
+}
+
+.bottomNavbar.collapsed .navIcon {
+  margin-right: 0;
+}
+
+.bottomNavbar.collapsed .logoContainer {
+  justify-content: center;
+  padding: 0 10px 20px;
+}
+
+.bottomNavbar.collapsed .toggleButton img {
+  bottom: 30px; 
+  transform: rotate(180deg); /* spin the chevron pretty cool */
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .bottomNavbar {
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    top: auto;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-around;
   }
 
-  .bottomNavbar {
-    position: fixed;
-    bottom: unset;
-    left: 0;
-    top: 0;
-    width: 16vw; /* Adjust the width as needed */
-    height: 100%;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px 0;
-    gap: 20px; /* Increased gap between buttons for better spacing */
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2); /* Add a shadow for better visibility */
+  .logoContainer,
+  .toggleButton {
+    display: none;
+  }
+
+  .navItems {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+    gap: 0;
   }
 
   .navbarButton {
-    width: 90%; /* Stretch buttons to match sidebar width */
-    padding: 10px 0px; /* Thin height for buttons */
-    font-size: 1rem;
-    text-align: center;
-    border-radius: 10px; /* Slightly rounded corners */
+    width: auto;
+    padding: 10px;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .navbarButton:hover {
-    transform: translateX(5px); /* Subtle slide-in effect on hover */
+  .navIcon {
+    margin: 0;
+    width: 18px;
+    height: 18px;
+  }
+
+  .navbarButton span {
+    font-size: 0.7rem;
   }
 }

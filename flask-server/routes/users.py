@@ -100,7 +100,16 @@ def logout():
   logout_user()
   response = jsonify({'message': 'Logged out successfully'})
   response.headers['Cache-Control'] = 'no-store'
-  response.set_cookie('session', '', expires=0)  # Clear session cookie
+  # response.set_cookie('session', '', expires=0)  # Clear session cookie
+  response.set_cookie(
+    'session',
+    '',
+    expires=0,
+    path='/login',  # Match the cookie path used during login
+    secure=True,  # If using HTTPS
+    httponly=True,
+    samesite='Lax'
+  )
   return response
 
 @users_bp.route('/protected', methods=['GET'])
