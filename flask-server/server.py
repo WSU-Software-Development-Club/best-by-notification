@@ -13,8 +13,6 @@ from flask_login import LoginManager
 from flask_session import Session
 import os
 
-from utils.celery import celery
-
 app = Flask(__name__)
 bcrypt = Bcrypt(app)  # Initialize Bcrypt with the app
 # CORS(app, supports_credentials=True, origins=["http://192.168.0.101:3000", "http://localhost:3000"]) # Allows cross-origin requests from React frontend
