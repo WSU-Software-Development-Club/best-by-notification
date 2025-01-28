@@ -22,12 +22,29 @@
 
 .textStyle {
   font-family: Rubik Doodle Shadow;
+  font-family: GothicA1-Regular;
   color: #fffbfb;
   font-size: 32px;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.appTitle {
+  font-size: 36px;
+  font-family: GothicA1-Regular;
+  color: #985c35;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.appDescription {
+  margin-top: -10px;
+  margin-bottom: 50px;
+  color: #985c35;
 }
 
 .startButtonStyle {
@@ -52,5 +69,12 @@
   .circleStyle {
     width: 260px;
     height: 260px;
+  }
+
+  .appTitle {
+    font-size: 64px;
+  }
+
+  .appDescription {
   }
 }

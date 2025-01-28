@@ -100,7 +100,7 @@ def check_expiring_products():
           send_email_notification(user.email, product, "expired", "It belongs in the street!!!")
           print(f"Notification: {product.name} is expired.")
           
-        elif dayLeft <= 2:
+        elif dayLeft <= 7:
           send_email_notification(user.email, product, "expiring soon", "Please cook with it!")
           print(f"Notification: {product.name} is expiring in {dayLeft} days. You better cook with it soon!")
     threading.Timer(86400, check_expiring_products).start()

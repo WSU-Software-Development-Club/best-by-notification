@@ -26,13 +26,14 @@ function Welcome() {
         <Logo />
       </div>
       <div className="textStyle">
-        <h1>Welcome!</h1>
+        <h1 className="appTitle">Best-By Notification</h1>
+        <h2 className="appDescription">Your fridge's best friend!</h2>
         <button
           type="button"
           className="startButtonStyle"
           onClick={routeChange}
         >
-          Start Scanning!
+          Start saving food!
         </button>
       </div>
     </div>
