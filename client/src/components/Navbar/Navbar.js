@@ -62,7 +62,7 @@ const Navbar = ({ toggleModal, toggleIngredientModal }) => {
         </button>
         <button className="navbarButton" onClick={() => navigate("/History")}>
           <img src={historyIcon} alt="History" className="navIcon" />
-          <span>View History</span>
+          <span>View Your Products</span>
         </button>
         <button className="navbarButton" onClick={toggleIngredientModal}>
           <img src={recipeIcon} alt="Recipes" className="navIcon" />
