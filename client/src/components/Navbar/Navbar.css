@@ -39,9 +39,9 @@
 }
 
 .homeIcon:hover {
-  transform: scale(1.1); 
-  opacity: 0.9; 
-  filter: brightness(1.1); 
+  transform: scale(1.1);
+  opacity: 0.9;
+  filter: brightness(1.1);
 }
 
 /* For extra interactivity */
@@ -70,6 +70,10 @@
   white-space: nowrap;
 }
 
+/* .navbarButton:first-child {
+  display: none;
+} */
+
 .navbarButton:hover {
   background-color: grey;
   transform: translateX(3px);
@@ -91,7 +95,7 @@
 .navIcon {
   width: 22px;
   height: 22px;
-  margin-right: 18px; 
+  margin-right: 18px;
   filter: invert(0.85);
   transition: all 0.3s ease;
 }
@@ -146,7 +150,7 @@
 }
 
 .bottomNavbar.collapsed .toggleButton img {
-  bottom: 30px; 
+  bottom: 30px;
   transform: rotate(180deg); /* spin the chevron pretty cool */
 }
 
@@ -159,11 +163,15 @@
     top: auto;
     flex-direction: row;
     padding: 10px;
+    padding-left: 0px;
     justify-content: space-around;
   }
 
-  .logoContainer,
   .toggleButton {
+    display: none;
+  }
+
+  .logoContainer {
     display: none;
   }
 
@@ -179,6 +187,10 @@
     padding: 10px;
     flex-direction: column;
     gap: 4px;
+  }
+
+  .navbarButton:first-child {
+    display: flex;
   }
 
   .navIcon {

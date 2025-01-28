@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import eggIcon from "../../assets/images/fried-egg.png"; // Import the icon
 import menuToggleIcon from "../../assets/images/line-angle-left-icon.png";
-import addIcon from "../../assets/images/plus-round-line-icon.png";       
+import addIcon from "../../assets/images/plus-round-line-icon.png";
 import historyIcon from "../../assets/images/notebook-line-icon.png";
 import recipeIcon from "../../assets/images/text-document-add-icon.png";
 import logoutIcon from "../../assets/images/logout-line-icon.png";
+import homeIcon from "../../assets/images/home-icon.png";
 import "./Navbar.css"; // Assuming you are using the same CSS file for Navbar
 
 const Navbar = ({ toggleModal, toggleIngredientModal }) => {
@@ -51,6 +52,10 @@ const Navbar = ({ toggleModal, toggleIngredientModal }) => {
       </div>
 
       <div className="navItems">
+        <button className="navbarButton" onClick={() => navigate("/InputForm")}>
+          <img src={homeIcon} alt="home" className="navIcon" />
+          <span>Home</span>
+        </button>
         <button className="navbarButton" onClick={toggleModal}>
           <img src={addIcon} alt="Add" className="navIcon" />
           <span>Add Product</span>
@@ -69,7 +74,7 @@ const Navbar = ({ toggleModal, toggleIngredientModal }) => {
         </button>
       </div>
 
-      <button 
+      <button
         className="toggleButton"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
