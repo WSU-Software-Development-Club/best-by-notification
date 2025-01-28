@@ -70,10 +70,6 @@
   white-space: nowrap;
 }
 
-/* .navbarButton:first-child {
-  display: none;
-} */
-
 .navbarButton:hover {
   background-color: grey;
   transform: translateX(3px);
@@ -187,10 +183,6 @@
     padding: 10px;
     flex-direction: column;
     gap: 4px;
-  }
-
-  .navbarButton:first-child {
-    display: flex;
   }
 
   .navIcon {
