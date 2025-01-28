@@ -13,11 +13,12 @@ from flask_login import LoginManager
 from flask_session import Session
 import os
 
+from utils.celery import celery
+
 app = Flask(__name__)
 bcrypt = Bcrypt(app)  # Initialize Bcrypt with the app
 # CORS(app, supports_credentials=True, origins=["http://192.168.0.101:3000", "http://localhost:3000"]) # Allows cross-origin requests from React frontend
 CORS(app, supports_credentials=True, origins=["http://localhost:3000", "http://192.168.0.101:3000", "https://best-by-notification.onrender.com"])
-mail = Mail(app) # instantiate the mail class 
 # app.secret_key = secrets.token_hex(32) # 32 bytes = 64-character hex string
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
 
@@ -29,7 +30,8 @@ app.config['MAIL_USERNAME'] = 'khangbui2023@gmail.com'
 app.config['MAIL_PASSWORD'] = 'omdt jihh bqho enfc'
 app.config['MAIL_USE_TLS'] = False  
 app.config['MAIL_USE_SSL'] = True
-mail = Mail(app) 
+
+mail = Mail(app) # instantiate the mail class 
 
 # Session and cookie configuration
 app.config['SESSION_COOKIE_HTTPONLY'] = True
@@ -89,7 +91,7 @@ def check_expiring_products():
       print(user.email)
       if not user.email:
         print(f"User with id {user.id} does not have an email set.")
-        continue
+        continue  
       
       products = Product.query.filter_by(user_id = user.id).all()
       for product in products:
@@ -103,7 +105,7 @@ def check_expiring_products():
         elif dayLeft <= 7:
           send_email_notification(user.email, product, "expiring soon", "Please cook with it!")
           print(f"Notification: {product.name} is expiring in {dayLeft} days. You better cook with it soon!")
-    threading.Timer(86400, check_expiring_products).start()
+    threading.Timer(180, check_expiring_products).start()
 
 # Method to send email, notifying about expiring/expired product(s)
 def send_email_notification(user_email, product, status, action): 
