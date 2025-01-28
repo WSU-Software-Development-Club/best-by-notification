@@ -7,10 +7,12 @@ import grains from "../assets/icons/colored/grain-icon.png";
 import snacks from "../assets/icons/colored/snacks-icon.png";
 import beverages from "../assets/icons/colored/drink-icon.png";
 import frozen from "../assets/icons/colored/snowflake-icon.png";
+import meat from "../assets/icons/colored/meat-icon.png";
 import other from "../assets/icons/uncolored/image-photography-icon.png";
 
 const categoryIcons = {
   poultry,
+  meat,
   seafood,
   dairy,
   fruits,

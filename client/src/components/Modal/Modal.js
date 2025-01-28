@@ -31,6 +31,7 @@ const Modal = ({
             Select Product Category
           </option>
           <option value="poultry">Poultry</option>
+          <option value="meat">Meat</option>
           <option value="seafood">Seafood</option>
           <option value="dairy">Dairy</option>
           <option value="fruits">Fruits</option>
