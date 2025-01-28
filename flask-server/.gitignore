@@ -173,3 +173,6 @@ cython_debug/
 
 # Ignore .env file specific to backend
 .env
+
+# Ignore database file
+/flask-server/instance/app.db

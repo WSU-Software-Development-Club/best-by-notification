@@ -20,7 +20,7 @@ def add_product_for_user(user_id):
     return jsonify({'error': 'Name, expiration date, and category are required.'}), 400
   
   # Validate category (can expand this list as needed)
-  valid_categories = ['poultry', 'seafood', 'dairy', 'fruits', 'vegetables', 'grains', 'snacks', 'beverages', 'frozen', 'other']
+  valid_categories = ['poultry', 'meat', 'seafood', 'dairy', 'fruits', 'vegetables', 'grains', 'snacks', 'beverages', 'frozen', 'other']
   if category not in valid_categories:
     return jsonify({'error': 'Invalid category. Please select a valid category. Yours:' + category}), 400
   
