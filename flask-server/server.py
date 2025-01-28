@@ -77,7 +77,7 @@ app.register_blueprint(users_bp)
 # Initialize the database
 with app.app_context():
   if not os.path.exists('app.db'):  # Only create the database if it doesn't exist
-        db.create_all()
+    db.create_all()
 
 # Background task to check for expiring products
 def check_expiring_products():
@@ -126,4 +126,4 @@ def hello():
     return "Hello from the Best-By app Backend."
 
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", port=5000, debug=True)
+  app.run(host="0.0.0.0", port=5000)
