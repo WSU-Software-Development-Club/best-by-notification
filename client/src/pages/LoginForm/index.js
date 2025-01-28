@@ -29,7 +29,6 @@ function LoginForm() {
           body: JSON.stringify({ email, password }),
         }
       );
-      alert(process.env.REACT_APP_API_BASE_URL);
       const data = await response.json();
       if (response.ok) {
         // Save user details in localStorage
