@@ -94,7 +94,6 @@ def get_current_user():
   })
   
 @users_bp.route('/logout', methods=['POST'])
-@login_required
 def logout():
   print("Logout route accessed")  # Add this log
   logout_user()

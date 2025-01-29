@@ -11,9 +11,11 @@ from routes.users import users_bp
 import threading
 from flask_login import LoginManager
 from flask_session import Session
+from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
+load_dotenv()
 bcrypt = Bcrypt(app)  # Initialize Bcrypt with the app
 # CORS(app, supports_credentials=True, origins=["http://192.168.0.101:3000", "http://localhost:3000"]) # Allows cross-origin requests from React frontend
 CORS(app, supports_credentials=True, origins=["http://localhost:3000", "http://192.168.0.101:3000", "https://best-by-notification.onrender.com"])
