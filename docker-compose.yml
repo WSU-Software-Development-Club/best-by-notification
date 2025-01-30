@@ -13,7 +13,8 @@ services:
       - frontend # Ensure backend waits for the frontend to be available
     networks:
       - app-network
-
+    volumes:
+      - ./flask-server/instance/app.db # Persist the database
   frontend:
     build:
       context: ./client
@@ -30,3 +31,7 @@ services:
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  app-data:
+    driver: local
