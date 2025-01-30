@@ -14,7 +14,7 @@ services:
     networks:
       - app-network
     volumes:
-      - ./flask-server/instance/app.db # Persist the database
+      - app-data:/flask-server/instance # Persist the database
   frontend:
     build:
       context: ./client
