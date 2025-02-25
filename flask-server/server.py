@@ -11,6 +11,7 @@ from routes.users import users_bp
 import threading
 from flask_login import LoginManager
 from flask_session import Session
+from flask_migrate import Migrate
 from dotenv import load_dotenv
 import os
 
@@ -23,32 +24,36 @@ CORS(app, supports_credentials=True, origins=["http://localhost:3000", "http://1
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
 
 # configuration of mail 
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_DEFAULT_SENDER'] = 'khangbui2023@gmail.com'
-app.config['MAIL_USERNAME'] = 'khangbui2023@gmail.com'
-app.config['MAIL_PASSWORD'] = 'omdt jihh bqho enfc'
-app.config['MAIL_USE_TLS'] = False  
-app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_SERVER']=os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
+app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
 
 mail = Mail(app) # instantiate the mail class 
 
 # Session and cookie configuration
-app.config['SESSION_COOKIE_HTTPONLY'] = True
-app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['SESSION_COOKIE_HTTPONLY'] = os.getenv('SESSION_COOKIE_HTTPONLY') == 'True'
+app.config['SESSION_COOKIE_SAMESITE'] = os.getenv('SESSION_COOKIE_SAMESITE')
 # app.config['SESSION_COOKIE_SECURE'] = os.getenv('FLASK_ENV') == 'production'
-app.config['SESSION_COOKIE_SECURE'] = False
+app.config['SESSION_COOKIE_SECURE'] = os.getenv('SESSION_COOKIE_SECURE') == 'True'
 
-app.config['SESSION_TYPE'] = 'filesystem'  # Store sessions on the server filesystem
-app.config['SESSION_PERMANENT'] = False
-app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_TYPE'] = os.getenv('SESSION_TYPE')  # Store sessions on the server filesystem
+app.config['SESSION_PERMANENT'] = os.getenv('SESSION_PERMANENT') == 'True'
+app.config['SESSION_USE_SIGNER'] = os.getenv('SESSION_USE_SIGNER') == 'True'
 Session(app)
 
 # Global variable to store recipient email
 thread_running = False
 
 # Config SQLite database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+
+# Config Postgres database
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+
 # Set this to False to improve performance and avoid seeing unnecessary warnings.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -61,6 +66,9 @@ login_manager.init_app(app)  # Bind to the app
 login_manager.login_view = 'login'
 login_manager.login_message = "Unauthorized access. Please log in first."
 login_manager.login_message_category = "error"
+
+# Initialize Flask-Migrate
+migrate = Migrate(app, db)
 
 # Custom unauthorized handler
 @login_manager.unauthorized_handler
@@ -77,9 +85,9 @@ app.register_blueprint(products_bp)
 app.register_blueprint(users_bp)
 
 # Initialize the database
-with app.app_context():
-  if not os.path.exists('app.db'):  # Only create the database if it doesn't exist
-    db.create_all()
+# with app.app_context():
+#   if not os.path.exists('app.db'):  # Only create the database if it doesn't exist
+#     db.create_all()
 
 # Background task to check for expiring products
 def check_expiring_products():
@@ -125,7 +133,7 @@ check_expiring_products()
 
 @app.route('/')
 def hello():
-    return "Hello from the Best-By app Backend."
+  return "Hello from the Best-By app Backend."
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=5000)
