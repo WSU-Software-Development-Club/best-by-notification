@@ -176,3 +176,5 @@ cython_debug/
 
 # Ignore database file
 /flask-server/instance/app.db
+
+*.sh

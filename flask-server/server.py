@@ -25,7 +25,7 @@ app.secret_key = os.getenv('FLASK_SECRET_KEY')
 
 # configuration of mail 
 app.config['MAIL_SERVER']=os.getenv('MAIL_SERVER')
-app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', '465'))
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
@@ -43,7 +43,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_COOKIE_HTTPONLY'] = os.getenv('SESSION_COOKIE_HTTPONLY') == 'True'
 app.config['SESSION_COOKIE_SAMESITE'] = os.getenv('SESSION_COOKIE_SAMESITE')
 app.config['SESSION_COOKIE_SECURE'] = os.getenv('SESSION_COOKIE_SECURE') == 'True'
-app.config['SESSION_TYPE'] = os.getenv('SESSION_TYPE')
+app.config['SESSION_TYPE'] = os.getenv('SESSION_TYPE', 'filesystem')
 app.config['SESSION_PERMANENT'] = os.getenv('SESSION_PERMANENT') == 'True'
 app.config['SESSION_USE_SIGNER'] = os.getenv('SESSION_USE_SIGNER') == 'True'
 
