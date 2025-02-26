@@ -1,30 +1,45 @@
-# Use the official Python image as a base
+# Multi-stage build to reduce final image size
+# Stage 1: Builder image for compiling dependencies
 FROM python:3.12-slim AS builder
 
-# Set environment variables to avoid Python writing .pyc files and enable unbuffered output
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Install system-level dependencies for Python and clean up unnecessary files after
+# Install system dependencies needed for building Python packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
-    libpq-dev && \
+    libpq-dev \
+    curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copy the requirements file and install Python dependencies
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies in virtual environment
+RUN python -m venv /opt/venv && \
+    /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application into the container
+# Stage 2: Runtime image
+FROM python:3.12-slim
+
+# Install runtime dependencies (curl)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy virtual environment from builder
+COPY --from=builder /opt/venv /opt/venv
+
+# Set environment variables
+ENV PATH="/opt/venv/bin:$PATH" \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
 COPY . .
 
-# Expose the application port
 EXPOSE 5000
 
-# Run the Flask application with Gunicorn
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "server:app"]
