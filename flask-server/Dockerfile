@@ -1,5 +1,5 @@
 # Use the official Python image as a base
-FROM python:3.12-slim
+FROM python:3.12-slim AS builder
 
 # Set environment variables to avoid Python writing .pyc files and enable unbuffered output
 ENV PYTHONDONTWRITEBYTECODE=1 \

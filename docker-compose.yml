@@ -5,28 +5,39 @@ services:
     container_name: flask-backend
     ports:
       - "5000:5000"
-    environment:
-      FLASK_APP_API_BASE_URL: "https://best-by-notification.onrender.com" # Backend API URL for the frontend
-      FLASK_SECRET_KEY: "381806719b87962eb5d3f8aabe2c83823499a18974d882fa84ea62834e925583"
-      FLASK_ENV: "production"
+    env_file:
+      - ./flask-server/.env
     depends_on:
-      - frontend # Ensure backend waits for the frontend to be available
+      - db # Ensure backend waits for the db to be available
     networks:
       - app-network
     volumes:
       - app-data:/flask-server/instance # Persist the database
+    # command: gunicorn -w 4 -b 0.0.0.0:5000 server:app # Ensure Flask starts with Gunicorn
   frontend:
     build:
       context: ./client
       args:
-        REACT_APP_API_BASE_URL: "https://best-by-notification-back-end.onrender.com" # Pass as build arg
+        REACT_APP_API_BASE_URL: "http://localhost:5000" # Pass as build arg
     container_name: react-frontend
     ports:
       - "3000:3000"
     environment:
-      REACT_APP_API_BASE_URL: "https://best-by-notification-back-end.onrender.com" # Frontend API URL for the backend
+      REACT_APP_API_BASE_URL: "http://localhost:5000" # Frontend API URL for the backend
     networks:
       - app-network
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./flask-server/.env # Use environment variables from .env file
+    networks:
+      - app-network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data # Persist database data
 
 networks:
   app-network:
@@ -34,4 +45,6 @@ networks:
 
 volumes:
   app-data:
+    driver: local
+  postgres-data: # Volume for PostgreSQL data persistence
     driver: local

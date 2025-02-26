@@ -73,7 +73,7 @@ migrate = Migrate(app, db)
 # Custom unauthorized handler
 @login_manager.unauthorized_handler
 def unauthorized():
-    return jsonify({'error': 'Unauthorized access. Please log in first.'}), 401
+  return jsonify({'error': 'Unauthorized access. Please log in first.'}), 401
 
 # User loader for Flask-Login
 @login_manager.user_loader
@@ -84,10 +84,10 @@ def load_user(id):
 app.register_blueprint(products_bp)
 app.register_blueprint(users_bp)
 
-# Initialize the database
-# with app.app_context():
-#   if not os.path.exists('app.db'):  # Only create the database if it doesn't exist
-#     db.create_all()
+#Initialize the database
+with app.app_context():
+  # if not os.path.exists('app.db'):  # Only create the database if it doesn't exist
+  db.create_all()
 
 # Background task to check for expiring products
 def check_expiring_products():
