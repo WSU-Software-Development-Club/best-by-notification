@@ -6,15 +6,16 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# Install system dependencies (remove version pinning)
+# Install system dependencies with pinned versions
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    build-essential \
-    gcc \
-    libpq-dev \
-    curl && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+apt-get install -y --no-install-recommends \
+build-essential \
+gcc \
+libpq-dev \
+curl \
+ca-certificates && \
+apt-get clean && \
+rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 
@@ -28,7 +29,8 @@ FROM python:3.12-slim
 # Install runtime dependencies (updated)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    curl && \
+    curl \
+    ca-certificates && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
