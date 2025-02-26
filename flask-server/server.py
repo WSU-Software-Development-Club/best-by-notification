@@ -86,8 +86,8 @@ app.register_blueprint(users_bp)
 
 #Initialize the database
 with app.app_context():
-  # if not os.path.exists('app.db'):  # Only create the database if it doesn't exist
-  db.create_all()
+  if not os.path.exists('app.db'):  # Only create the database if it doesn't exist
+    db.create_all()
 
 # Background task to check for expiring products
 def check_expiring_products():
