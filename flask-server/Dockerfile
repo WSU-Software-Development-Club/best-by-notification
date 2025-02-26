@@ -1,5 +1,4 @@
-# Multi-stage build to reduce final image size
-# Stage 1: Builder image for compiling dependencies
+# Stage 1: Builder
 FROM python:3.12-slim AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -7,29 +6,33 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# Install system dependencies needed for building Python packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install system dependencies (remove version pinning)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
     libpq-dev \
     curl && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 
-# Install Python dependencies in virtual environment
+# Create and use virtual environment
 RUN python -m venv /opt/venv && \
     /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
 
-# Stage 2: Runtime image
+# Stage 2: Runtime
 FROM python:3.12-slim
 
-# Install runtime dependencies (curl)
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install runtime dependencies (updated)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     curl && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Copy virtual environment from builder
+# Copy virtual environment
 COPY --from=builder /opt/venv /opt/venv
 
 # Set environment variables
