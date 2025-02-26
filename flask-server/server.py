@@ -13,6 +13,7 @@ from flask_login import LoginManager
 from flask_session import Session
 from flask_migrate import Migrate
 from dotenv import load_dotenv
+from flask import request
 import os
 
 app = Flask(__name__)
@@ -114,7 +115,7 @@ def check_expiring_products():
         elif dayLeft <= 7:
           send_email_notification(user.email, product, f"is expiring in {dayLeft} days.", "Please use it!")
           print(f"Notification: {product.name} is expiring in {dayLeft} days. You better cook with it soon!")
-    threading.Timer(86400, check_expiring_products).start()
+    # threading.Timer(86400, check_expiring_products).start()
 
 # Method to send email, notifying about expiring/expired product(s)
 def send_email_notification(user_email, product, status, action): 
@@ -128,8 +129,19 @@ def send_email_notification(user_email, product, status, action):
     print("No recipient email set")
     return None
 
+@app.route('/check-expiry')
+def trigger_expiry_check():
+  # Validate the cron secret token
+  auth_token = request.args.get('token') or request.headers.get('X-Auth-Token')
+  if auth_token != os.getenv('CRON_SECRET_TOKEN'):
+    return jsonify({'error': 'Unauthorized'}), 401
+  # Run in thread to avoid blocking
+  thread = threading.Thread(target=check_expiring_products)
+  thread.start()
+  return jsonify({'message': 'Expiration check initiated'}), 200
+
 # Start the expiration checking thread:
-check_expiring_products()  
+# check_expiring_products()  
 
 @app.route('/')
 def hello():
