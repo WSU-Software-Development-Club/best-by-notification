@@ -3,7 +3,7 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 from flask_cors import CORS
 from datetime import datetime
-from db_setup import db
+from db_setup import db, init_db
 from models.product import Product
 from routes.products import products_bp
 from models.user import User
@@ -19,7 +19,6 @@ import os
 app = Flask(__name__)
 load_dotenv()
 bcrypt = Bcrypt(app)  # Initialize Bcrypt with the app
-# CORS(app, supports_credentials=True, origins=["http://192.168.0.101:3000", "http://localhost:3000"]) # Allows cross-origin requests from React frontend
 CORS(app, supports_credentials=True, origins=["http://localhost:3000", "http://192.168.0.101:3000", "https://best-by-notification.onrender.com"])
 # app.secret_key = secrets.token_hex(32) # 32 bytes = 64-character hex string
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
@@ -32,34 +31,32 @@ app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
 app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
-
 mail = Mail(app) # instantiate the mail class 
+
+
+# Config Postgres database
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+# Set this to False to improve performance and avoid seeing unnecessary warnings.
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Session and cookie configuration
 app.config['SESSION_COOKIE_HTTPONLY'] = os.getenv('SESSION_COOKIE_HTTPONLY') == 'True'
 app.config['SESSION_COOKIE_SAMESITE'] = os.getenv('SESSION_COOKIE_SAMESITE')
-# app.config['SESSION_COOKIE_SECURE'] = os.getenv('FLASK_ENV') == 'production'
 app.config['SESSION_COOKIE_SECURE'] = os.getenv('SESSION_COOKIE_SECURE') == 'True'
-
-app.config['SESSION_TYPE'] = os.getenv('SESSION_TYPE')  # Store sessions on the server filesystem
+app.config['SESSION_TYPE'] = os.getenv('SESSION_TYPE')
 app.config['SESSION_PERMANENT'] = os.getenv('SESSION_PERMANENT') == 'True'
 app.config['SESSION_USE_SIGNER'] = os.getenv('SESSION_USE_SIGNER') == 'True'
+
+
+# Set up PostgreSQL-backed session storage
+#app.config['SESSION_SQLALCHEMY'] = db  # Connects Flask-Session to SQLAlchemy (PostgreSQL)
 Session(app)
 
 # Global variable to store recipient email
 thread_running = False
 
-# Config SQLite database
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-
-# Config Postgres database
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-
-# Set this to False to improve performance and avoid seeing unnecessary warnings.
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 # Set up the database
-db.init_app(app)
+init_db(app)
 
 # Initialize LoginManager
 login_manager = LoginManager()
